@@ -1,0 +1,42 @@
+{
+  "name": "nCognito",
+  "description": "Cross browser incognito mode extension",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "author": "Jakub Biesiada",
+  "homepage_url": "https://github.com/JB1905/ncognito",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/icon48.png",
+    "default_title": "nCognito",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "index.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "history",
+    "contextMenus"
+  ]
+}
