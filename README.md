@@ -1,6 +1,4 @@
 # nCognito
-
-## About
 nCognito is a cross browsers (Chrome, Firefox, Edge, Opera) incognito mode plugin.
 
 ## License
