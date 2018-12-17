@@ -7,69 +7,70 @@
 
     <main class="popup__content">
       <button @click="settings()">{{ settingsTitle }}</button>
-      
       <button @click="inPrivate()">{{ inPrivateTitle }}</button>
     </main>
   </div>
 </template>
 
 <script>
-  import { name, version } from '../../package.json';
+import extension from 'extensionizer';
 
-  export default {
-    data() {
-      return {
-        name,
-        version,
-        settingsTitle: 'Settings',
-        inPrivateTitle: 'Open in private window'
-      };
+import { name, version } from '../../package.json';
+
+export default {
+  data() {
+    return {
+      name,
+      version,
+      settingsTitle: 'Settings',
+      inPrivateTitle: 'Open in private window'
+    };
+  },
+  methods: {
+    settings() {
+      extension.runtime.openOptionsPage();
     },
-    methods: {
-      settings() {
-        global.browser.runtime.openOptionsPage();
-      },
-      inPrivate() {
-        global.browser.tabs.query(
-          {
-            active: true,
-            windowId: global.browser.windows.WINDOW_ID_CURRENT
-          },
-          tab => {
-            global.browser.windows.create({
-              incognito: true,
-              url: tab[0].url
-            });
-          }
-        );
-      }
+    inPrivate() {
+      extension.tabs.query(
+        {
+          active: true,
+          windowId: extension.windows.WINDOW_ID_CURRENT
+        },
+        tab => {
+          extension.windows.create({
+            incognito: true,
+            url: tab[0].url
+          });
+        }
+      );
     }
-  };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '../reset.scss';
+@import '../reset.scss';
 
-  .popup {
-    padding: 3px;
+.popup {
+  padding: 3px;
 
-    &__header {
-      margin: 0 2px 8px;
-      display: flex;
-      align-items: center;
+  &__header {
+    margin: 0 2px 8px;
+    display: flex;
+    align-items: center;
 
-      h2 {
-        margin: 0;
-        font-weight: 700;
-      }
-
-      span {
-        padding: 0 6px;
-      }
+    h2 {
+      margin: 0;
+      font-weight: 700;
     }
 
-    &__content {
-      display: flex;
+    span {
+      padding: 0 6px;
     }
   }
+
+  &__content {
+    display: flex;
+  }
+}
 </style>
