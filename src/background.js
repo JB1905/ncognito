@@ -5,6 +5,7 @@ function eventListeners() {
 }
 
 eventListeners();
+
 function handleMessage(req) {
   const { url, action } = req;
 
