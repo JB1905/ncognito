@@ -4,6 +4,9 @@
   "description": "Cross browser incognito mode extension",
   "author": "Jakub Biesiada",
   "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.21"
+  },
   "browserslist": [
     "> 0.25%",
     "not ie 11",
