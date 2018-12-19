@@ -215,10 +215,6 @@ export default {
   flex: 1;
 }
 
-input {
-  margin: 6px 0;
-}
-
 .add-to-list {
   margin-top: 10px;
 }

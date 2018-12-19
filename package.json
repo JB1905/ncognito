@@ -4,6 +4,10 @@
   "description": "Cross browser incognito mode extension",
   "author": "Jakub Biesiada",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint ./src --fix",
+    "prettier": "prettier --write './src/**/*.{vue,js,scss,html}'"
+  },
   "dependencies": {
     "vue": "^2.5.21"
   },

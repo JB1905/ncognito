@@ -55,8 +55,4 @@ export default {
 .panic-mode {
   flex: 1;
 }
-
-input {
-  margin: 6px 0;
-}
 </style>
