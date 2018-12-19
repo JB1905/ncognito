@@ -55,16 +55,16 @@ button {
 
 input {
   margin: 6px 0;
-}
 
-input[type="text"] {
-  padding: 6px 10px;
+  &[type="text"] {
+    padding: 6px 10px;
 
-  @include input;
-}
+    @include input;
+  }
 
-input[type="radio"] {
-  margin-left: 2px;
+  &[type="radio"] {
+    margin-left: 2px;
+  }
 }
 
 table {
