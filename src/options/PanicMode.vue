@@ -1,5 +1,5 @@
 <template>
-  <div class="panic-mode">
+  <div class="container">
     <h1>Panic mode</h1>
 
     <label>
@@ -50,8 +50,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '../reset.scss';
-
-.panic-mode {
-  flex: 1;
-}
 </style>

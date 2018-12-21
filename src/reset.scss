@@ -88,6 +88,14 @@ table {
   }
 }
 
+.container {
+  flex: 1;
+}
+
+.form-container {
+  margin-top: 10px;
+}
+
 .error {
   margin: 8px 0;
   color: #f00;

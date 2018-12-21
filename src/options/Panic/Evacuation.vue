@@ -25,7 +25,7 @@
       <label for="shortcode">Shortcode</label>
     </div>
 
-    <div v-if="way === 'shortcode'">
+    <div v-if="way === 'shortcode'" class="form-container">
       <input
         type="text"
         id="shortcode"
@@ -36,12 +36,12 @@
 
       <button @click="reset()">Reset shortcode</button>
 
-      <span class="error">{{ error }}</span>
+      <p class="error">{{ error }}</p>
     </div>
 
     <p>
       <sup>1</sup>
-      <i>Leaving the private mode by simultaneously pressing at least 5 keys</i>
+      <i>Leaving the private mode by simultaneously pressing at least 4 keys</i>
     </p>
   </section>
 </template>

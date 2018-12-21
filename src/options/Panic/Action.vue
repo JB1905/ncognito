@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div v-if="action === 'redirect'">
+    <div v-if="action === 'redirect'" class="form-container">
       <input
         type="text"
         placeholder="e.g: https://www.mozilla.org"
@@ -49,16 +49,19 @@
 
       <button @click="clear()">Reset destination page</button>
 
-      <span class="error">{{ error }}</span>
+      <p class="error">{{ error }}</p>
 
-      <label for="hide">
-        <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
-        Hide
-      </label>
+      <div>
+        <label for="hide">
+          <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
+          Hide
+        </label>
 
-      <label for="mute">
-        <input type="checkbox" v-model="muted" id="mute" @click="mute()" /> Mute
-      </label>
+        <label for="mute">
+          <input type="checkbox" v-model="muted" id="mute" @click="mute()" />
+          Mute
+        </label>
+      </div>
     </div>
   </section>
 </template>

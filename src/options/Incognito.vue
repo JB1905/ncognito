@@ -1,5 +1,5 @@
 <template>
-  <div class="incognito">
+  <div class="container">
     <h1>Always incognito</h1>
 
     <label>
@@ -43,7 +43,7 @@
           <label for="path">Path</label>
         </div>
 
-        <div class="add-to-list">
+        <div class="form-container">
           <input
             type="text"
             placeholder="e.g: google, http"
@@ -53,7 +53,7 @@
           <button @click="add()">Add</button>
         </div>
 
-        <div class="error">{{ error }}</div>
+        <p class="error">{{ error }}</p>
 
         <table v-if="addresses.length > 0">
           <tr>
@@ -209,12 +209,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '../reset.scss';
-
-.incognito {
-  flex: 1;
-}
-
-.add-to-list {
-  margin-top: 10px;
-}
 </style>
