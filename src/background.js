@@ -15,7 +15,7 @@ function eventListeners() {
 eventListeners();
 
 function handleMessage(req) {
-  const { url, action } = req;
+  const { url, action, mute } = req;
 
   if (url) {
     if (firstWindow) {
@@ -38,5 +38,11 @@ function handleMessage(req) {
     );
   } else if (action === 'window') {
     extension.windows.getCurrent(window => extension.windows.remove(window.id));
+  }
+
+  if (mute) {
+    extension.tabs.query({ active: true }, tab =>
+      extension.tabs.update(tab[0].id, { muted: true })
+    );
   }
 }

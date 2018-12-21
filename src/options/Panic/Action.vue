@@ -50,6 +50,15 @@
       <button @click="clear()">Reset destination page</button>
 
       <span class="error">{{ error }}</span>
+
+      <label for="hide">
+        <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
+        Hide
+      </label>
+
+      <label for="mute">
+        <input type="checkbox" v-model="muted" id="mute" @click="mute()" /> Mute
+      </label>
     </div>
   </section>
 </template>
@@ -64,6 +73,8 @@ export default {
     return {
       action: '',
       address: '',
+      hidden: '',
+      muted: '',
       error: ''
     };
   },
@@ -98,6 +109,26 @@ export default {
           }
         }
       });
+
+      extension.storage.local.get('hide', res => {
+        if (!res.hide) {
+          extension.storage.local.set({ hide: false });
+
+          this.hidden = false;
+        } else {
+          this.hidden = true;
+        }
+      });
+
+      extension.storage.local.get('mute', res => {
+        if (!res.mute) {
+          extension.storage.local.set({ mute: false });
+
+          this.muted = false;
+        } else {
+          this.muted = true;
+        }
+      });
     },
     set(action) {
       if (action === 'redirect') {
@@ -126,6 +157,12 @@ export default {
           }
         });
       }
+    },
+    mute() {
+      extension.storage.local.set({ mute: !this.muted });
+    },
+    hide() {
+      extension.storage.local.set({ hide: !this.hidden });
     },
     clear() {
       if (confirm('Reset destination page?')) {

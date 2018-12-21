@@ -49,7 +49,17 @@ function runEscape() {
   extension.storage.local.get('action', res => {
     if (res.action) {
       if (res.action.name === 'redirect') {
-        document.body.style.display = 'none';
+        extension.storage.local.get('hide', res => {
+          if (res.hide) document.body.style.display = 'none';
+        });
+
+        extension.storage.local.get('mute', res => {
+          if (res.mute) {
+            extension.runtime.sendMessage({
+              mute: true
+            });
+          }
+        });
 
         window.location.href = res.action.address;
       } else if (res.action.name === 'tab') {
