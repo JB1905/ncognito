@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>{{ name }}</h3>
+    <h3>Way of evacuation</h3>
 
     <div>
       <input
@@ -52,7 +52,6 @@ import extension from 'extensionizer';
 export default {
   data() {
     return {
-      name: 'Way of evacuation',
       way: '',
       shortcode: '',
       error: ''

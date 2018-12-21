@@ -1,6 +1,6 @@
 <template>
   <div class="incognito">
-    <h1>{{ name }}</h1>
+    <h1>Always incognito</h1>
 
     <label>
       <input type="checkbox" @click="toggle()" :checked="enabled" /> Enable
@@ -84,7 +84,6 @@ import extension from 'extensionizer';
 export default {
   data() {
     return {
-      name: 'Always incognito',
       enabled: '',
       addresses: [],
       url: '',

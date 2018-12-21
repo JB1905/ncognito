@@ -1,6 +1,6 @@
 <template>
   <div class="panic-mode">
-    <h1>{{ name }}</h1>
+    <h1>Panic mode</h1>
 
     <label>
       <input type="checkbox" @click="toggle()" :checked="enabled" /> Enable
@@ -22,7 +22,6 @@ import Evacuation from './Panic/Evacuation';
 export default {
   data() {
     return {
-      name: 'Panic mode',
       enabled: ''
     };
   },

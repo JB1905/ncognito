@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>{{ name }}</h3>
+    <h3>Action</h3>
 
     <div>
       <div>
@@ -62,7 +62,6 @@ import { pattern } from '../../helpers/pattern';
 export default {
   data() {
     return {
-      name: 'Action',
       action: '',
       address: '',
       error: ''
