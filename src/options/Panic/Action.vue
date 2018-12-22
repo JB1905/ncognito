@@ -51,7 +51,7 @@
 
       <p class="error">{{ error }}</p>
 
-      <div>
+      <div class="options">
         <label for="hide">
           <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
           Hide
@@ -183,4 +183,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../reset.scss';
+
+.options {
+  > label {
+    margin-right: 10px;
+  }
+}
 </style>

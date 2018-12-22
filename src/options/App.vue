@@ -1,8 +1,8 @@
 <template>
-  <div class="option-view">
+  <main>
     <PanicMode />
     <Incognito />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.option-view {
+main {
   min-width: 440px;
   padding: 6px;
   display: flex;

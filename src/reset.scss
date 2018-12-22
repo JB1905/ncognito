@@ -29,6 +29,17 @@ ul {
   list-style: none;
 }
 
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+h3 {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
 @mixin input {
   border-radius: 2px;
   background-color: #fff;
@@ -62,8 +73,9 @@ input {
     @include input;
   }
 
-  &[type="radio"] {
-    margin-left: 2px;
+  &[type="radio"],
+  &[type="checkbox"] {
+    margin-right: 3px;
   }
 }
 
