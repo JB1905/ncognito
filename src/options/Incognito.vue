@@ -198,6 +198,11 @@ export default {
         );
       }
     }
+  },
+  watch: {
+    enabled() {
+      if (this.enabled) this.list();
+    }
   }
 };
 </script>
