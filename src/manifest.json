@@ -26,5 +26,5 @@
       "js": ["index.js"]
     }
   ],
-  "permissions": ["tabs", "storage", "history", "contextMenus"]
+  "permissions": ["tabs", "storage", "history"]
 }
