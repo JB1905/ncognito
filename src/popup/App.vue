@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <header class="popup__header">
-      <h2>{{ name }}</h2>
+      <h1>{{ name }}</h1>
       <span>v{{ version }}</span>
     </header>
 
@@ -58,11 +58,6 @@ export default {
     margin: 0 2px 8px;
     display: flex;
     align-items: center;
-
-    h2 {
-      margin: 0;
-      font-weight: 700;
-    }
 
     span {
       padding: 0 6px;

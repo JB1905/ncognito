@@ -32,8 +32,8 @@
         placeholder="e.g: shift+e"
         v-model="shortcode"
       />
-      <button class="save-code" @click="set()" type="submit">Set</button>
 
+      <button type="submit" class="save-code" @click="set()">Set</button>
       <button @click="reset()">Reset shortcode</button>
 
       <p class="error">{{ error }}</p>

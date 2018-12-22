@@ -45,22 +45,18 @@
         placeholder="e.g: https://www.mozilla.org"
         v-model="address"
       />
-      <button type="submit" @click="set('redirect')">Add</button>
 
+      <button type="submit" @click="set('redirect')">Add</button>
       <button @click="clear()">Reset destination page</button>
 
       <p class="error">{{ error }}</p>
 
       <div class="options">
-        <label for="hide">
-          <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
-          Hide
-        </label>
+        <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
+        <label for="hide">Hide</label>
 
-        <label for="mute">
-          <input type="checkbox" v-model="muted" id="mute" @click="mute()" />
-          Mute
-        </label>
+        <input type="checkbox" v-model="muted" id="mute" @click="mute()" />
+        <label for="mute">Mute</label>
       </div>
     </div>
   </section>

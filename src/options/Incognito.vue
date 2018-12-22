@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1>Always incognito</h1>
+    <h2>Always incognito</h2>
 
     <label>
-      <input type="checkbox" @click="toggle()" :checked="enabled" /> Enable
+      <input type="checkbox" v-model="enabled" @click="toggle()" /> Enable
     </label>
 
     <div v-if="this.enabled">
@@ -124,13 +124,8 @@ export default {
               address => address.url === this.url && address.type === this.type
             );
 
-            if (check.length > 0) {
-              this.error = 'Item already exists';
-
-              return;
-            } else {
-              this.error = '';
-            }
+            if (check.length > 0) this.error = 'Item already exists';
+            else this.error = '';
           }
 
           const address = {

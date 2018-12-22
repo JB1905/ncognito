@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1>Panic mode</h1>
+    <h2>Panic mode</h2>
 
     <label>
-      <input type="checkbox" @click="toggle()" :checked="enabled" /> Enable
+      <input type="checkbox" v-model="enabled" @click="toggle()" /> Enable
     </label>
 
     <div v-if="this.enabled">
