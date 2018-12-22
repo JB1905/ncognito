@@ -54,9 +54,9 @@ h3 {
 }
 
 button {
-  padding: 5px 16px;
+  padding: 6px 16px;
   white-space: nowrap;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 
   @include input;
 
@@ -75,6 +75,7 @@ input {
 
   &[type="text"] {
     padding: 6px 10px;
+    font-size: 0.9rem;
 
     @include input;
   }
