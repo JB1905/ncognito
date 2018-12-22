@@ -111,7 +111,7 @@ export default {
     },
     list() {
       extension.storage.local.get('addresses', res => {
-        this.addresses = res.addresses;
+        if (res.addresses) this.addresses = res.addresses;
       });
     },
     add() {

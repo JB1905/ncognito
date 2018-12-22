@@ -22,7 +22,10 @@ main {
   min-width: 440px;
   padding: 6px;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
+
+  > div {
+    min-width: 440px;
+  }
 }
 </style>
