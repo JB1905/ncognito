@@ -66,7 +66,6 @@
             <td>{{ address.url }}</td>
             <td>{{ address.type }}</td>
             <td>
-              <button type="submit" @click="edit(index)">Edit</button>
               <button type="submit" @click="remove(index)">Remove</button>
             </td>
           </tr>
@@ -133,9 +132,7 @@ export default {
             type: this.type
           };
 
-          if (!res.addresses) {
-            this.addresses.push(address);
-          } else {
+          if (res.addresses) {
             this.addresses = res.addresses;
 
             const inArray = this.addresses.filter(
@@ -143,6 +140,8 @@ export default {
             );
 
             if (inArray.length === 0) this.addresses.push(address);
+          } else {
+            this.addresses.push(address);
           }
 
           extension.storage.local.set({
@@ -154,18 +153,6 @@ export default {
         } else {
           this.error = 'Type and value are required.';
         }
-      });
-    },
-    edit(index) {
-      extension.storage.local.get('addresses', res => {
-        const addresses = res.addresses;
-
-        /*extension.storage.local.set(
-          {
-            addresses: addresses.filter((value, i) => i !== index && value)
-          },
-          () => this.list()
-        );*/
       });
     },
     remove(index) {

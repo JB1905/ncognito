@@ -3,17 +3,6 @@ import extension from 'extensionizer';
 let firstWindow = true;
 let firstTab = true;
 
-const windowOpened = () => (firstWindow = false);
-const windowClosed = () => (firstWindow = true);
-
-function eventListeners() {
-  extension.runtime.onMessage.addListener(e => handleMessage(e));
-  extension.windows.onCreated.addListener(windowOpened);
-  extension.windows.onRemoved.addListener(windowClosed);
-}
-
-eventListeners();
-
 function handleMessage(req) {
   const { url, action, mute } = req;
 
@@ -46,3 +35,7 @@ function handleMessage(req) {
     );
   }
 }
+
+extension.runtime.onMessage.addListener(e => handleMessage(e));
+extension.windows.onCreated.addListener(() => (firstWindow = false));
+extension.windows.onRemoved.addListener(() => (firstWindow = true));
