@@ -5,10 +5,11 @@
   "author": "Jakub Biesiada",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --hide-modules",
-    "build:dev": "cross-env NODE_ENV=development webpack --hide-modules",
+    "release": "npm run prettier && npm run lint && npm run build",
+    "build": "webpack --env build",
+    "build:dev": "webpack --env dev",
     "watch": "npm run build -- --watch",
-    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch",
+    "watch:dev": "npm run build:dev -- --watch",
     "lint": "eslint ./src --fix",
     "prettier": "prettier --write './src/**/*.{vue,js,scss,html}'"
   },

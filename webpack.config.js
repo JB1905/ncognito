@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const ejs = require('ejs');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -26,7 +25,7 @@ const config = {
     rules: [
       {
         test: /\.vue$/,
-        loaders: 'vue-loader'
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
@@ -34,35 +33,13 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      },
-      {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader?indentedSyntax'
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif|svg|ico)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?emitFile=false'
-        }
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
     new CopyWebpackPlugin([
       { from: 'icons', to: 'icons', ignore: ['icon.xcf', '.DS_Store'] },
       {
