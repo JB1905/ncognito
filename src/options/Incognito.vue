@@ -92,17 +92,14 @@ export default {
   },
   created() {
     extension.storage.local.get('incognitoEnabled', res => {
-      if (res.incognitoEnabled) {
-        this.enabled = true;
+      this.enabled = res.incognitoEnabled;
 
-        this.list();
-      } else this.enabled = false;
+      if (!!this.enabled) this.list();
     });
   },
   methods: {
     toggle() {
-      if (this.enabled) this.enabled = false;
-      else this.enabled = true;
+      this.enabled = !this.enabled;
 
       extension.storage.local.set({
         incognitoEnabled: this.enabled

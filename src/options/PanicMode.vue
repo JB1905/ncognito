@@ -30,15 +30,14 @@ export default {
     Evacuation
   },
   created() {
-    extension.storage.local.get('panicModeEnabled', res => {
-      if (res.panicModeEnabled) this.enabled = true;
-      else this.enabled = false;
-    });
+    extension.storage.local.get(
+      'panicModeEnabled',
+      res => (this.enabled = res.panicModeEnabled)
+    );
   },
   methods: {
     toggle() {
-      if (this.enabled) this.enabled = false;
-      else this.enabled = true;
+      this.enabled = !this.enabled;
 
       extension.storage.local.set({
         panicModeEnabled: this.enabled

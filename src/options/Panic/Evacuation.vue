@@ -7,7 +7,7 @@
         type="radio"
         name="exit"
         id="piano"
-        @click="set()"
+        @click="set('piano')"
         value="piano"
         v-model="way"
       />
@@ -33,8 +33,8 @@
         v-model="shortcode"
       />
 
-      <button type="submit" class="save-code" @click="set()">Set</button>
       <button @click="reset()">Reset shortcode</button>
+      <button type="submit" class="save-code" @click="set('shortcode')">Set</button>
 
       <p class="error">{{ error }}</p>
     </div>
@@ -87,14 +87,14 @@ export default {
         }
       });
     },
-    set() {
-      if (this.way === 'piano') {
+    set(way) {
+      if (way === 'piano') {
         extension.storage.local.set({
           evacuation: {
             name: 'piano'
           }
         });
-      } else if (this.way === 'shortcode') {
+      } else if (way === 'shortcode') {
         if (this.shortcode) {
           extension.storage.local.set({
             evacuation: {

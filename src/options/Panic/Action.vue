@@ -89,11 +89,9 @@ export default {
   },
   created() {
     extension.storage.local.get('panicModeEnabled', res => {
-      if (res.panicModeEnabled) {
-        this.enabled = true;
+      this.enabled = res.panicModeEnable;
 
-        this.init();
-      } else this.enabled = false;
+      if (!this.enabled) this.init();
     });
   },
   methods: {
@@ -120,7 +118,7 @@ export default {
       });
 
       extension.storage.local.get('options', res => {
-        let options = res.options || {};
+        const options = res.options || {};
 
         if (!options.hide) options.hide = this.hidden = false;
         else this.hidden = true;
@@ -164,7 +162,7 @@ export default {
         const options = res.options;
 
         options[name] = !options[name];
-  
+
         extension.storage.local.set({ options });
       });
     },
