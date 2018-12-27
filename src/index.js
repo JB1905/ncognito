@@ -49,15 +49,15 @@ function runEscape() {
   extension.storage.local.get('action', res => {
     if (res.action) {
       if (res.action.name === 'redirect') {
-        extension.storage.local.get('hide', res => {
-          if (res.hide) document.body.style.display = 'none';
-        });
+        extension.storage.local.get('options', res => {
+          if (res.options) {
+            if (res.options.hide) document.body.style.display = 'none';
 
-        extension.storage.local.get('mute', res => {
-          if (res.mute) {
-            extension.runtime.sendMessage({
-              mute: true
-            });
+            if (res.options.mute) {
+              extension.runtime.sendMessage({
+                mute: true
+              });
+            }
           }
         });
 

@@ -52,10 +52,20 @@
       <p class="error">{{ error }}</p>
 
       <div class="options">
-        <input type="checkbox" v-model="hidden" id="hide" @click="hide()" />
+        <input
+          type="checkbox"
+          v-model="hidden"
+          id="hide"
+          @click="options('hide')"
+        />
         <label for="hide">Hide</label>
 
-        <input type="checkbox" v-model="muted" id="mute" @click="mute()" />
+        <input
+          type="checkbox"
+          v-model="muted"
+          id="mute"
+          @click="options('mute')"
+        />
         <label for="mute">Mute</label>
       </div>
     </div>
@@ -109,24 +119,16 @@ export default {
         }
       });
 
-      extension.storage.local.get('hide', res => {
-        if (!res.hide) {
-          extension.storage.local.set({ hide: false });
+      extension.storage.local.get('options', res => {
+        let options = res.options || {};
 
-          this.hidden = false;
-        } else {
-          this.hidden = true;
-        }
-      });
+        if (!options.hide) options.hide = this.hidden = false;
+        else this.hidden = true;
 
-      extension.storage.local.get('mute', res => {
-        if (!res.mute) {
-          extension.storage.local.set({ mute: false });
+        if (!options.mute) options.mute = this.muted = false;
+        else this.muted = true;
 
-          this.muted = false;
-        } else {
-          this.muted = true;
-        }
+        extension.storage.local.set({ options });
       });
     },
     set(action) {
@@ -157,11 +159,14 @@ export default {
         });
       }
     },
-    mute() {
-      extension.storage.local.set({ mute: !this.muted });
-    },
-    hide() {
-      extension.storage.local.set({ hide: !this.hidden });
+    options(name) {
+      extension.storage.local.get('options', res => {
+        const options = res.options;
+
+        options[name] = !options[name];
+  
+        extension.storage.local.set({ options });
+      });
     },
     clear() {
       if (confirm('Reset destination page?')) {
