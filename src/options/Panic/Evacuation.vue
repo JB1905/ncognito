@@ -34,7 +34,9 @@
       />
 
       <button @click="reset()">Reset shortcode</button>
-      <button type="submit" class="save-code" @click="set('shortcode')">Set</button>
+      <button type="submit" class="save-code" @click="set('shortcode')">
+        Set
+      </button>
 
       <p class="error">{{ error }}</p>
     </div>

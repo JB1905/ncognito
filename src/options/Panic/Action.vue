@@ -4,38 +4,36 @@
 
     <div>
       <div>
-        <input
-          type="radio"
-          id="tab"
-          @click="set('tab')"
-          name="action"
-          value="tab"
-          v-model="action"
-        />
-        <label for="tab">Close tab</label>
+        <label>
+          <input
+            type="radio"
+            @click="set('tab')"
+            name="action"
+            value="tab"
+            v-model="action"
+          />
+          Close tab
+        </label>
       </div>
 
       <div>
-        <input
-          type="radio"
-          id="window"
-          @click="set('window')"
-          name="action"
-          value="window"
-          v-model="action"
-        />
-        <label for="window">Close window</label>
+        <label>
+          <input
+            type="radio"
+            @click="set('window')"
+            name="action"
+            value="window"
+            v-model="action"
+          />
+          Close window
+        </label>
       </div>
 
       <div>
-        <input
-          type="radio"
-          id="redirect"
-          name="action"
-          value="redirect"
-          v-model="action"
-        />
-        <label for="redirect">Redirect to website</label>
+        <label>
+          <input type="radio" name="action" value="redirect" v-model="action" />
+          Redirect to website
+        </label>
       </div>
     </div>
 
@@ -52,21 +50,15 @@
       <p class="error">{{ error }}</p>
 
       <div class="options">
-        <input
-          type="checkbox"
-          v-model="hidden"
-          id="hide"
-          @click="options('hide')"
-        />
-        <label for="hide">Hide</label>
+        <label>
+          <input type="checkbox" v-model="hidden" @click="options('hide')" />
+          Hide
+        </label>
 
-        <input
-          type="checkbox"
-          v-model="muted"
-          id="mute"
-          @click="options('mute')"
-        />
-        <label for="mute">Mute</label>
+        <label>
+          <input type="checkbox" v-model="muted" @click="options('mute')" />
+          Mute
+        </label>
       </div>
     </div>
   </section>

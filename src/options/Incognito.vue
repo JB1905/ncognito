@@ -11,36 +11,23 @@
 
       <div>
         <div>
-          <input
-            type="radio"
-            id="address"
-            name="type"
-            value="address"
-            v-model="type"
-          />
-          <label for="address">Address</label>
+          <label>
+            <input type="radio" name="type" value="address" v-model="type" />
+            Address
+          </label>
         </div>
 
         <div>
-          <input
-            type="radio"
-            id="protocol"
-            name="type"
-            value="protocol"
-            v-model="type"
-          />
-          <label for="protocol">Protocol</label>
+          <label>
+            <input type="radio" name="type" value="protocol" v-model="type" />
+            Protocol
+          </label>
         </div>
 
         <div>
-          <input
-            type="radio"
-            id="path"
-            name="type"
-            value="path"
-            v-model="type"
-          />
-          <label for="path">Path</label>
+          <label>
+            <input type="radio" name="type" value="path" v-model="type" /> Path
+          </label>
         </div>
 
         <div class="form-container">
