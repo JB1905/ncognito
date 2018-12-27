@@ -37,10 +37,8 @@ export default {
   },
   methods: {
     toggle() {
-      this.enabled = !this.enabled;
-
       extension.storage.local.set({
-        panicModeEnabled: this.enabled
+        panicModeEnabled: !this.enabled
       });
     }
   }
