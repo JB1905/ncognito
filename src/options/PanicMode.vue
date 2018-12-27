@@ -2,13 +2,9 @@
   <div class="container">
     <h2>Panic mode</h2>
 
-    <input
-      type="checkbox"
-      id="enable-panic-mode"
-      v-model="enabled"
-      @click="toggle()"
-    />
-    <label for="enable-panic-mode">Enable</label>
+    <label>
+      <input type="checkbox" v-model="enabled" @click="toggle()" /> Enable
+    </label>
 
     <div v-if="this.enabled">
       <Action />
