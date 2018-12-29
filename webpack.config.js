@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-const ejs = require('ejs');
 const env = require('yargs').argv.env;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
