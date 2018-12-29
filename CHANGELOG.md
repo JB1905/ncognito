@@ -1,6 +1,6 @@
 # nCognito Changelog
 
-## 1.0.0 (Soon)
+## 1.0.0 (2018-12-29)
 #### New Feature
 - added always in incognito mode to open different addresses, protocols and paths in private window
 - added panic mode to quick escape window, tab or website
