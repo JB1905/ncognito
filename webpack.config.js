@@ -1,12 +1,19 @@
 const webpack = require('webpack');
 const ejs = require('ejs');
+const env = require('yargs').argv.env;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 const { VueLoaderPlugin } = require('vue-loader');
+const platform = require('platform');
 const { version } = require('./package.json');
 
+let mode;
+
+if (env === 'build') mode = 'production';
+else mode = 'development';
+
 const config = {
-  mode: process.env.NODE_ENV,
+  mode,
   context: `${__dirname}/src`,
   entry: {
     index: './index.js',
@@ -44,13 +51,11 @@ const config = {
       { from: 'icons', to: 'icons', ignore: ['icon.xcf', '.DS_Store'] },
       {
         from: 'popup/popup.html',
-        to: 'popup/popup.html',
-        transform: transformHtml
+        to: 'popup/popup.html'
       },
       {
         from: 'options/options.html',
-        to: 'options/options.html',
-        transform: transformHtml
+        to: 'options/options.html'
       },
       {
         from: 'manifest.json',
@@ -71,26 +76,10 @@ const config = {
   ]
 };
 
-if (config.mode === 'production') {
-  config.plugins = (config.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    })
-  ]);
-}
-
-if (process.env.HMR === 'true') {
+if (config.mode === 'development' && platform.name === 'Chrome') {
   config.plugins = (config.plugins || []).concat([
     new ChromeExtensionReloader()
   ]);
-}
-
-function transformHtml(content) {
-  return ejs.render(content.toString(), {
-    ...process.env
-  });
 }
 
 module.exports = config;

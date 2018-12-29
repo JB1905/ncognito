@@ -1,19 +1,11 @@
 export const checkArrays = (keys, res) => {
-  let equal;
+  const shortcode = res.evacuation.shortcode.toLowerCase().split('+');
 
-  if (keys.length === res.evacuation.shortcode.split('+').length) {
+  let equal = false;
+
+  if (keys.length === shortcode.length) {
     keys.sort().map((key, index) => {
-      if (
-        key.toLowerCase() !==
-        res.evacuation.shortcode
-          .toLowerCase()
-          .split('+')
-          .sort()[index]
-      ) {
-        equal = false;
-      } else {
-        equal = true;
-      }
+      if (key.toLowerCase() === shortcode.sort()[index]) equal = true;
     });
   }
 

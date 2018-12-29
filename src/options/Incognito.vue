@@ -107,7 +107,7 @@ export default {
               address => address.url === this.url && address.type === this.type
             );
 
-            if (check.length > 0) this.error = 'Item already exists';
+            if (check.length) this.error = 'Item already exists';
             else this.error = '';
           }
 
@@ -123,7 +123,7 @@ export default {
               obj => obj.url === address.url && obj.type === address.type
             );
 
-            if (inArray.length === 0) this.addresses.push(address);
+            if (!inArray.length) this.addresses.push(address);
           } else {
             this.addresses.push(address);
           }

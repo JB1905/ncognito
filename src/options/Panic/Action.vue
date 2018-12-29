@@ -45,7 +45,6 @@
       />
 
       <button type="submit" @click="set('redirect')">Add</button>
-      <button @click="clear()">Reset destination page</button>
 
       <p class="error">{{ error }}</p>
 
@@ -157,16 +156,6 @@ export default {
 
         extension.storage.local.set({ options });
       });
-    },
-    clear() {
-      if (confirm('Reset destination page?')) {
-        extension.storage.local.remove('action', () => {
-          this.action = '';
-          this.address = '';
-
-          this.init();
-        });
-      }
     }
   }
 };

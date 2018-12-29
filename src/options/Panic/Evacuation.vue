@@ -33,7 +33,6 @@
         v-model="shortcode"
       />
 
-      <button @click="reset()">Reset shortcode</button>
       <button type="submit" class="save-code" @click="set('shortcode')">
         Set
       </button>
@@ -107,16 +106,6 @@ export default {
         } else {
           this.error = 'Shortcode is required';
         }
-      }
-    },
-    reset() {
-      if (confirm('Reset evacuation action?')) {
-        extension.storage.local.remove('evacuation', () => {
-          this.way = '';
-          this.shortcode = '';
-
-          this.init();
-        });
       }
     }
   }
