@@ -19,7 +19,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.2",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.12.0",
