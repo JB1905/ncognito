@@ -42,23 +42,25 @@
 
         <p class="error">{{ error }}</p>
 
-        <table v-if="addresses.length > 0">
-          <tr>
-            <th>URL</th>
-            <th>Type</th>
-            <th>Actions</th>
-          </tr>
+        <div v-if="addresses.length">
+          <table>
+            <tr>
+              <th>URL</th>
+              <th>Type</th>
+              <th>Actions</th>
+            </tr>
 
-          <tr v-for="(address, index) in addresses">
-            <td>{{ address.url }}</td>
-            <td>{{ address.type }}</td>
-            <td>
-              <button type="submit" @click="remove(index)">Remove</button>
-            </td>
-          </tr>
-        </table>
+            <tr v-for="(address, index) in addresses">
+              <td>{{ address.url }}</td>
+              <td>{{ address.type }}</td>
+              <td>
+                <button type="submit" @click="remove(index)">Remove</button>
+              </td>
+            </tr>
+          </table>
 
-        <button v-if="addresses.length" @click="clear()">Clear</button>
+          <button @click="clear()">Clear</button>
+        </div>
       </div>
     </div>
   </div>
