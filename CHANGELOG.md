@@ -1,5 +1,13 @@
 # nCognito Changelog
 
+## 1.0.1 (2019-01-09)
+#### Improvement
+- cleaned up Incognito.vue
+
+#### Repository Changes
+- added Travis CI config
+- updated devDependencies
+
 ## 1.0.0 (2018-12-29)
 #### New Feature
 - added always in incognito mode to open different addresses, protocols and paths in private window

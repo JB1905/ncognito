@@ -1,6 +1,6 @@
 {
-  "name": "nCognito",
-  "version": "1.0.0",
+  "name": "ncognito",
+  "version": "1.0.1",
   "description": "Cross browser incognito mode extension",
   "author": "Jakub Biesiada",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "vue": "^2.5.21"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.2",
+    "@vue/cli-plugin-babel": "^3.3.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^4.6.0",
@@ -32,11 +32,11 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "vue-eslint-parser": "^5.0.0",
-    "vue-loader": "^15.5.0",
+    "vue-loader": "^15.5.1",
     "vue-template-compiler": "^2.5.21",
     "webpack": "^4.28.3",
     "webpack-chrome-extension-reloader": "^1.1.1",
-    "webpack-cli": "^3.2.0"
+    "webpack-cli": "^3.2.1"
   },
   "browserslist": [
     "> 0.25%",

@@ -15,7 +15,7 @@
 <script>
 import extension from 'extensionizer';
 
-import { name, version } from '../../package.json';
+import { name, version } from '../manifest.json';
 
 export default {
   data() {
