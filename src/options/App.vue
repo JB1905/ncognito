@@ -1,7 +1,7 @@
 <template>
   <main>
-    <PanicMode />
-    <Incognito />
+    <panic-mode />
+    <incognito />
   </main>
 </template>
 

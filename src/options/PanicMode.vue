@@ -7,8 +7,8 @@
     </label>
 
     <div v-if="this.enabled">
-      <Action />
-      <Evacuation />
+      <action />
+      <evacuation />
     </div>
   </div>
 </template>
