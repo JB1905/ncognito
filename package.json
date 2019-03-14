@@ -14,15 +14,15 @@
     "prettier": "prettier --write './src/**/*.{vue,js,scss,html}'"
   },
   "dependencies": {
-    "vue": "^2.6.6"
+    "vue": "^2.6.9"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.4.1",
+    "@vue/cli-plugin-babel": "^3.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "copy-webpack-plugin": "^5.0.0",
-    "css-loader": "^2.1.0",
-    "eslint": "^5.14.1",
+    "copy-webpack-plugin": "^5.0.1",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.15.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-vue": "^5.2.2",
     "extensionizer": "^1.0.1",
@@ -31,10 +31,10 @@
     "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "vue-eslint-parser": "^6.0.2",
-    "vue-loader": "^15.6.4",
-    "vue-template-compiler": "^2.6.6",
-    "webpack": "^4.29.5",
+    "vue-eslint-parser": "^6.0.3",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.9",
+    "webpack": "^4.29.6",
     "webpack-chrome-extension-reloader": "^1.2.0",
     "webpack-cli": "^3.2.3"
   },
