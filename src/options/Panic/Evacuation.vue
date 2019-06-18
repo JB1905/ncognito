@@ -25,7 +25,7 @@
       <label for="shortcode">Shortcode</label>
     </div>
 
-    <div v-if="way === 'shortcode'" class="form-container">
+    <div v-if="way === 'shortcode'" class="container__form">
       <input
         type="text"
         id="shortcode"
@@ -33,7 +33,7 @@
         v-model="shortcode"
       />
 
-      <button type="submit" class="save-code" @click="set('shortcode')">
+      <button type="submit" @click="set('shortcode')">
         Set
       </button>
 

@@ -30,7 +30,7 @@
           </label>
         </div>
 
-        <div class="form-container">
+        <div class="container__form">
           <input
             type="text"
             placeholder="e.g: google, http"
@@ -50,7 +50,7 @@
               <th>Actions</th>
             </tr>
 
-            <tr v-for="(address, index) in addresses">
+            <tr v-for="(address, index) in addresses" v-bind:key="index">
               <td>{{ address.url }}</td>
               <td>{{ address.type }}</td>
               <td>
