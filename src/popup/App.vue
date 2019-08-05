@@ -6,8 +6,8 @@
     </header>
 
     <main class="popup__content">
-      <button @click="settings()">{{ settingsTitle }}</button>
-      <button @click="inPrivate()">{{ inPrivateTitle }}</button>
+      <button @click="settings">{{ settingsTitle }}</button>
+      <button @click="inPrivate">{{ inPrivateTitle }}</button>
     </main>
   </div>
 </template>

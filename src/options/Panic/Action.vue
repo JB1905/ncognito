@@ -75,7 +75,7 @@ export default {
       address: '',
       hidden: '',
       muted: '',
-      error: ''
+      error: null
     };
   },
   created() {
@@ -130,7 +130,7 @@ export default {
             }
           });
 
-          this.error = '';
+          this.error = null;
         } else {
           this.error = 'Address is incorrect';
         }

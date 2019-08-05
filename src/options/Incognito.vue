@@ -3,7 +3,7 @@
     <h2>Always incognito</h2>
 
     <label>
-      <input type="checkbox" v-model="enabled" @click="toggle()" /> Enable
+      <input type="checkbox" v-model="enabled" @click="toggle" /> Enable
     </label>
 
     <div v-if="this.enabled">
@@ -37,7 +37,7 @@
             value="{url}"
             v-model="url"
           />
-          <button @click="add()">Add</button>
+          <button @click="add">Add</button>
         </div>
 
         <p class="error">{{ error }}</p>
@@ -50,7 +50,7 @@
               <th>Actions</th>
             </tr>
 
-            <tr v-for="(address, index) in addresses" v-bind:key="index">
+            <tr v-for="(address, index) in addresses" :key="index">
               <td>{{ address.url }}</td>
               <td>{{ address.type }}</td>
               <td>
@@ -59,7 +59,7 @@
             </tr>
           </table>
 
-          <button @click="clear()">Clear</button>
+          <button @click="clear">Clear</button>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ export default {
       addresses: [],
       url: '',
       type: '',
-      error: ''
+      error: null
     };
   },
   created() {
@@ -96,21 +96,28 @@ export default {
     },
     list() {
       extension.storage.local.get('addresses', res => {
-        if (res.addresses) this.addresses = res.addresses;
+        if (res.addresses) {
+          this.addresses = res.addresses;
+        }
       });
     },
     add() {
       extension.storage.local.get('addresses', res => {
         if (this.url && this.type) {
-          if (this.error) this.error = '';
+          if (this.error) {
+            this.error = null;
+          }
 
           if (res.addresses && res.addresses.length) {
             const check = res.addresses.filter(
               address => address.url === this.url && address.type === this.type
             );
 
-            if (check.length) this.error = 'Item already exists';
-            else this.error = '';
+            if (check.length) {
+              this.error = 'Item already exists';
+            } else {
+              this.error = null;
+            }
           }
 
           const address = {
@@ -125,7 +132,9 @@ export default {
               obj => obj.url === address.url && obj.type === address.type
             );
 
-            if (!inArray.length) this.addresses.push(address);
+            if (!inArray.length) {
+              this.addresses.push(address);
+            }
           } else {
             this.addresses.push(address);
           }
@@ -164,7 +173,7 @@ export default {
           () => {
             this.url = '';
             this.type = '';
-            this.error = '';
+            this.error = null;
 
             this.list();
           }

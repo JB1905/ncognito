@@ -3,7 +3,7 @@
     <h2>Panic mode</h2>
 
     <label>
-      <input type="checkbox" v-model="enabled" @click="toggle()" /> Enable
+      <input type="checkbox" v-model="enabled" @click="toggle" /> Enable
     </label>
 
     <div v-if="this.enabled">

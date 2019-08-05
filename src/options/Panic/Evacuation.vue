@@ -55,7 +55,7 @@ export default {
     return {
       way: '',
       shortcode: '',
-      error: ''
+      error: null
     };
   },
   created() {
