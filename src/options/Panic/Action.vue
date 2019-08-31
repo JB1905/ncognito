@@ -111,11 +111,17 @@ export default {
       extension.storage.local.get('options', res => {
         const options = res.options || {};
 
-        if (!options.hide) options.hide = this.hidden = false;
-        else this.hidden = true;
+        if (!options.hide) {
+          options.hide = this.hidden = false;
+        } else {
+          this.hidden = true;
+        }
 
-        if (!options.mute) options.mute = this.muted = false;
-        else this.muted = true;
+        if (!options.mute) {
+          options.mute = this.muted = false;
+        } else {
+          this.muted = true;
+        }
 
         extension.storage.local.set({ options });
       });
