@@ -1,4 +1,6 @@
 # nCognito
+
+## About
 nCognito is a cross browsers (Chrome, Firefox, Edge, Opera) incognito mode plugin.
 
 ## Features
@@ -14,6 +16,8 @@ After detecting the address containing the set values, the page will be opened i
 
 ### Open in incognito
 After click on the button in popup window, current address will be opened in private window.
+
+## Setup
 
 ## License
 This project is licensed under the MIT License © 2018-present Jakub Biesiada
