@@ -1,4 +1,4 @@
-import extension from "extensionizer";
+import extension from 'extensionizer';
 
 // let privateWindow = null;
 // // let newTab = true;

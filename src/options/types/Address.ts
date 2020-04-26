@@ -1,4 +1,4 @@
-import { IncognitoPattern } from "../enums/IncognitoPattern";
+import { IncognitoPattern } from '../enums/IncognitoPattern';
 
 export type Address = {
   url: string;

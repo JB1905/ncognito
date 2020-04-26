@@ -1,4 +1,4 @@
-import extension from "extensionizer";
+import extension from 'extensionizer';
 
 // import { checkArrays } from "./helpers/checkArrays";
 

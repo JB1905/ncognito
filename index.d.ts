@@ -1,1 +1,1 @@
-declare module "extensionizer";
+declare module 'extensionizer';
