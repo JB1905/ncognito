@@ -20,14 +20,6 @@
   "options_ui": {
     "page": "options/options.html"
   },
-  "page_action": {
-    "browser_style": true,
-    "default_icon": {
-      "19": "button/geo-19.png",
-      "38": "button/geo-38.png"
-    },
-    "default_title": "Add nCognito Bookmark"
-  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
