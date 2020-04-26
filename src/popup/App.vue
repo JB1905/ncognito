@@ -6,45 +6,45 @@
     </header>
 
     <main class="popup__content">
-      <button @click="settings">{{ settingsTitle }}</button>
-      <button @click="inPrivate">{{ inPrivateTitle }}</button>
+      <button @click="openSettings">{{ settingsTitle }}</button>
+      <button @click="openInPrivate">{{ inPrivateTitle }}</button>
     </main>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import extension from 'extensionizer';
 
 import { name, version } from '../manifest.json';
 
 export default {
-  data() {
+  setup() {
+    const openSettings = () => extension.runtime.openOptionsPage();
+
+    const openInPrivate = () => {
+      extension.tabs.query(
+        {
+          active: true,
+          windowId: extension.windows.WINDOW_ID_CURRENT,
+        },
+        (tab) => {
+          extension.windows.create({
+            incognito: true,
+            url: tab[0].url,
+          });
+        }
+      );
+    };
+
     return {
       name,
       version,
       settingsTitle: 'Settings',
-      inPrivateTitle: 'Open in private window'
+      inPrivateTitle: 'Open in private window',
+      openSettings,
+      openInPrivate,
     };
   },
-  methods: {
-    settings() {
-      extension.runtime.openOptionsPage();
-    },
-    inPrivate() {
-      extension.tabs.query(
-        {
-          active: true,
-          windowId: extension.windows.WINDOW_ID_CURRENT
-        },
-        tab => {
-          extension.windows.create({
-            incognito: true,
-            url: tab[0].url
-          });
-        }
-      );
-    }
-  }
 };
 </script>
 

@@ -5,15 +5,15 @@
   </main>
 </template>
 
-<script>
-import PanicMode from './PanicMode';
-import Incognito from './Incognito';
+<script lang="ts">
+import PanicMode from './containers/PanicMode.vue';
+import Incognito from './containers/Incognito.vue';
 
 export default {
   components: {
     PanicMode,
-    Incognito
-  }
+    Incognito,
+  },
 };
 </script>
 

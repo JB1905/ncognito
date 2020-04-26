@@ -1,5 +1,13 @@
 # nCognito Changelog
 
+## 1.1.0 (2020-xx-xx)
+#### New Feature
+- added private bookmarks
+
+#### Improvement
+- avoided opening next private window if incognito window already exists
+- avoided opening always in incognito in non-private tab via link
+
 ## 1.0.2 (2019-02-08)
 #### Repository Changes
 - updated dependencies
