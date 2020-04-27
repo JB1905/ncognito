@@ -22,27 +22,29 @@
 import { ref, onMounted } from 'vue';
 import extension from 'extensionizer';
 
-// import Action from './Panic/Action';
-// import Evacuation from './Panic/Evacuation';
+import Action from './Action';
+import Evacuation from './Evacuation';
 
 export default {
   components: {
-    // Action,
-    // Evacuation,
+    Action,
+    Evacuation,
   },
   setup() {
     const isPanicModeEnabled = ref(false);
 
     const togglePanicMode = () => {
-      extension.storage.local.set({
-        panicModeEnabled: !isPanicModeEnabled.value,
-      });
+      isPanicModeEnabled.value = !isPanicModeEnabled.value;
+
+      // extension.storage.local.set({
+      //   panicModeEnabled: isPanicModeEnabled.value,
+      // });
     };
 
     onMounted(() => {
-      extension.storage.local.get('panicModeEnabled', (res) => {
-        isPanicModeEnabled.value = res.panicModeEnabled;
-      });
+      // extension.storage.local.get('panicModeEnabled', (res) => {
+      //   isPanicModeEnabled.value = res.panicModeEnabled;
+      // });
     });
 
     return {
@@ -54,5 +56,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../reset.scss';
+// @import '../../../reset.scss';
 </style>

@@ -57,16 +57,7 @@ export default {
     const shortcode = ref('');
     const error = ref('');
 
-    // onMounted(() => {
-    //   extension.storage.local.get('panicModeEnabled', (res) => {
-    //     // if (res.panicModeEnabled) {
-    //     //   isEnabled = true;
-    //     //   init();
-    //     // } else{ isEnabled = false;}
-    //   });
-    // });
-
-    const changeEvacuationWay = (way) => {
+    const changeEvacuationWay = (way: string) => {
       if (way === 'piano') {
         extension.storage.local.set({
           evacuation: {
@@ -88,25 +79,25 @@ export default {
     };
 
     onMounted(() => {
-      extension.storage.local.get('evacuation', (res) => {
-        if (!res.evacuation) {
-          extension.storage.local.set({
-            evacuation: {
-              name: 'piano',
-            },
-          });
+      // extension.storage.local.get('evacuation', (res) => {
+        // if (!res.evacuation) {
+          // extension.storage.local.set({
+          //   evacuation: {
+          //     name: 'piano',
+          //   },
+          // });
 
           evacuationWay.value = 'piano';
-        } else {
-          if (res.evacuation.name === 'piano') {
+        // } else {
+          // if (res.evacuation.name === 'piano') {
             evacuationWay.value = 'piano';
-          } else if (res.evacuation.name === 'shortcode') {
+          // } else if (res.evacuation.name === 'shortcode') {
             evacuationWay.value = 'shortcode';
 
-            shortcode.value = res.evacuation.shortcode;
-          }
-        }
-      });
+            // shortcode.value = res.evacuation.shortcode;
+          // }
+        // }
+      // });
     });
 
     return {
@@ -117,8 +108,20 @@ export default {
     };
   },
 };
+
+
+
+    // onMounted(() => {
+    //   extension.storage.local.get('panicModeEnabled', (res) => {
+    //     // if (res.panicModeEnabled) {
+    //     //   isEnabled = true;
+    //     //   init();
+    //     // } else{ isEnabled = false;}
+    //   });
+    // });
 </script>
 
 <style lang="scss" scoped>
-@import '../../../reset.scss';
+// @import '../../../reset.scss';
 </style>
+

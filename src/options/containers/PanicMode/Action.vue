@@ -7,7 +7,7 @@
         <label>
           <input
             type="radio"
-            @click="set('tab')"
+            @click="setAction('tab')"
             name="action"
             value="tab"
             v-model="action"
@@ -20,7 +20,7 @@
         <label>
           <input
             type="radio"
-            @click="set('window')"
+            @click="setAction('window')"
             name="action"
             value="window"
             v-model="action"
@@ -44,18 +44,18 @@
         v-model="address"
       />
 
-      <button type="submit" @click="set('redirect')">Add</button>
+      <button type="submit" @click="setAction('redirect')">Add</button>
 
       <p class="error">{{ error }}</p>
 
       <div class="options">
         <label>
-          <input type="checkbox" v-model="hidden" @click="options('hide')" />
+          <input type="checkbox" v-model="isHidden" @click="setOptions('hide')" />
           Hide
         </label>
 
         <label>
-          <input type="checkbox" v-model="muted" @click="options('mute')" />
+          <input type="checkbox" v-model="isMuted" @click="setOptions('mute')" />
           Mute
         </label>
       </div>
@@ -64,21 +64,18 @@
 </template>
 
 <script lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import extension from 'extensionizer';
-
-// import { pattern } from '../../helpers/pattern';
 
 export default {
   setup() {
-    // onMounted(() => {
-    //   extension.storage.local.get('panicModeEnabled', (res) => {
-    //     // isEnabled = res.panicModeEnable;
-    //     // if (!isEnabled) {init();}
-    //   });
-    // });
+    const action = ref('');
+    const address = ref('');
+    const isHidden = ref(false);
+    const isMuted = ref(false);
+    const error = ref('');
 
-    const set = (action) => {
+    const setAction = (action: string) => {
       if (action === 'redirect') {
         // TODO new Url()
         //   if (address && pattern.test(address)) {
@@ -107,24 +104,22 @@ export default {
         // }
       }
 
-      const options = (name) => {
-        extension.storage.local.get('options', (res) => {
-          const options = res.options;
-
-          options[name] = !options[name];
-
-          extension.storage.local.set({ options });
-        });
+      const setOptions = (name: string) => {
+        // extension.storage.local.get('options', (res) => {
+        // const options = res.options;
+        // options[name] = !options[name];
+        // extension.storage.local.set({ options });
+        // });
       };
 
       onMounted(() => {
         extension.storage.local.get('action', (res) => {
           if (!res.action) {
-            extension.storage.local.set({
-              action: {
-                name: 'tab',
-              },
-            });
+            // extension.storage.local.set({
+            //   action: {
+            //     name: 'tab',
+            //   },
+            // });
 
             // action = 'tab';
           } else {
@@ -142,28 +137,41 @@ export default {
         extension.storage.local.get('options', (res) => {
           const options = res.options || {};
 
-          if (!options.hide) {
-            // options.hide = hidden = false;
-          } else {
-            // hidden = true;
-          }
+          isHidden.value = !options.hide;
 
-          if (!options.mute) {
-            // options.mute = muted = false;
-          } else {
-            // muted = true;
-          }
+          isMuted.value = !options.mute;
 
-          extension.storage.local.set({ options });
+          // if (!options.hide) {
+          //   // options.hide = hidden = false;
+          // } else {
+          //   // hidden = true;
+          // }
+
+          // if (!options.mute) {
+          //   // options.mute = muted = false;
+          // } else {
+          //   // muted = true;
+          // }
+
+          // extension.storage.local.set({ options });
+        });
+      });
+
+      onMounted(() => {
+        extension.storage.local.get('panicModeEnabled', (res) => {
+          // isEnabled = res.panicModeEnable;
+          // if (!isEnabled) {init();}
         });
       });
 
       return {
-        // action: '',
-        //     address: '',
-        //     hidden: '',
-        //     muted: '',
-        //     error: null,
+        action,
+        address,
+        isHidden,
+        isMuted,
+        error,
+        setAction,
+        setOptions,
       };
     };
   },
@@ -171,7 +179,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../reset.scss';
+// @import '../../../reset.scss';
 
 .options {
   > label {

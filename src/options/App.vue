@@ -1,23 +1,23 @@
 <template>
   <main>
     <panic-mode />
-    <incognito />
+    <always-incognito />
   </main>
 </template>
 
 <script lang="ts">
-import PanicMode from './containers/PanicMode.vue';
-import Incognito from './containers/Incognito.vue';
+import PanicMode from './containers/PanicMode';
+import AlwaysIncognito from './containers/AlwaysIncognito';
 
 export default {
   components: {
     PanicMode,
-    Incognito,
+    AlwaysIncognito,
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 main {
   min-width: 440px;
   padding: 6px;
