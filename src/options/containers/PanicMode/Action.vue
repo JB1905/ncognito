@@ -7,9 +7,9 @@
         <label>
           <input
             type="radio"
-            @click="setAction('tab')"
             name="action"
-            value="tab"
+            :value="ActionType.Tab"
+            @click="setAction(ActionType.Tab)"
             v-model="action"
           />
           Close tab
@@ -20,9 +20,9 @@
         <label>
           <input
             type="radio"
-            @click="setAction('window')"
             name="action"
-            value="window"
+            :value="ActionType.Window"
+            @click="setAction(ActionType.Window)"
             v-model="action"
           />
           Close window
@@ -31,7 +31,12 @@
 
       <div>
         <label>
-          <input type="radio" name="action" value="redirect" v-model="action" />
+          <input
+            type="radio"
+            name="action"
+            :value="ActionType.Redirect"
+            v-model="action"
+          />
           Redirect to website
         </label>
       </div>
@@ -44,18 +49,26 @@
         v-model="address"
       />
 
-      <button type="submit" @click="setAction('redirect')">Add</button>
+      <button type="submit" @click="setAction(ActionType.Redirect)">Add</button>
 
       <p class="error">{{ error }}</p>
 
       <div class="options">
         <label>
-          <input type="checkbox" v-model="isHidden" @click="setOptions('hide')" />
+          <input
+            type="checkbox"
+            v-model="isHidden"
+            @click="setOptions('hide')"
+          />
           Hide
         </label>
 
         <label>
-          <input type="checkbox" v-model="isMuted" @click="setOptions('mute')" />
+          <input
+            type="checkbox"
+            v-model="isMuted"
+            @click="setOptions('mute')"
+          />
           Mute
         </label>
       </div>
@@ -64,126 +77,81 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
+
+import { ActionType } from '../../../shared/enums/ActionType';
 
 export default {
   setup() {
-    const action = ref('');
+    const action = ref<ActionType>();
     const address = ref('');
     const isHidden = ref(false);
     const isMuted = ref(false);
     const error = ref('');
 
-    const setAction = (action: string) => {
-      if (action === 'redirect') {
-        // TODO new Url()
-        //   if (address && pattern.test(address)) {
-        //     extension.storage.local.set({
-        //       action: {
-        //         name: 'redirect',
-        //         address,
-        //       },
-        //     });
-        //     error = null;
-        //   } else {
-        //     error = 'Address is incorrect';
-        //   }
-        // } else if (action === 'tab') {
-        //   extension.storage.local.set({
-        //     action: {
-        //       name: 'tab',
-        //     },
-        //   });
-        // } else if (action === 'window') {
-        //   extension.storage.local.set({
-        //     action: {
-        //       name: 'window',
-        //     },
-        //   });
-        // }
+    const setAction = (actionType: ActionType) => {
+      action.value = actionType;
+    };
+
+    const setOptions = (optionName: string) => {};
+
+    onMounted(() => {
+      extension.storage.local.get('action', (res) => {
+        // console.log(res.action.name)
+
+        // TODO
+        action.value = res.action?.name ?? '';
+      });
+    });
+
+    onMounted(() => {
+      extension.storage.local.get('options', (res) => {});
+    });
+
+    watch(action, () => {
+      if (action.value === ActionType.Redirect && !address.value) {
+        return;
       }
 
-      const setOptions = (name: string) => {
-        // extension.storage.local.get('options', (res) => {
-        // const options = res.options;
-        // options[name] = !options[name];
-        // extension.storage.local.set({ options });
-        // });
-      };
+      // console.log(action.value,  address.value)
 
-      onMounted(() => {
-        extension.storage.local.get('action', (res) => {
-          if (!res.action) {
-            // extension.storage.local.set({
-            //   action: {
-            //     name: 'tab',
-            //   },
-            // });
-
-            // action = 'tab';
-          } else {
-            if (res.action.name === 'redirect') {
-              // action = 'redirect';
-              // address = res.action.address;
-            } else if (res.action.name === 'tab') {
-              // action = 'tab';
-            } else if (res.action.name === 'window') {
-              // action = 'window';
-            }
-          }
-        });
-
-        extension.storage.local.get('options', (res) => {
-          const options = res.options || {};
-
-          isHidden.value = !options.hide;
-
-          isMuted.value = !options.mute;
-
-          // if (!options.hide) {
-          //   // options.hide = hidden = false;
-          // } else {
-          //   // hidden = true;
-          // }
-
-          // if (!options.mute) {
-          //   // options.mute = muted = false;
-          // } else {
-          //   // muted = true;
-          // }
-
-          // extension.storage.local.set({ options });
-        });
+      extension.storage.local.set({
+        action: {
+          name: action.value,
+          address: address.value,
+        },
       });
+    });
 
-      onMounted(() => {
-        extension.storage.local.get('panicModeEnabled', (res) => {
-          // isEnabled = res.panicModeEnable;
-          // if (!isEnabled) {init();}
-        });
-      });
-
-      return {
-        action,
-        address,
-        isHidden,
-        isMuted,
-        error,
-        setAction,
-        setOptions,
-      };
+    return {
+      action,
+      address,
+      isHidden,
+      isMuted,
+      error,
+      setAction,
+      setOptions,
+      ActionType,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// @import '../../../reset.scss';
+@import '../../../shared/reset.scss';
 
-.options {
-  > label {
-    margin-right: 10px;
-  }
+// .options {
+//   >
+label {
+  // input {
+  //   padding-right: 10px;
+  //   display: inline-block;
+  // }
+
+  display: flex;
+  align-items: center;
+  // background:red;
 }
+// }
 </style>

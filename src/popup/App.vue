@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../reset.scss';
+@import '../shared/reset.scss';
 
 .popup {
   padding: 3px;

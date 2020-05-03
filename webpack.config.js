@@ -15,10 +15,10 @@ const config = {
   mode,
   context: `${__dirname}/src`,
   entry: {
-    index: './index.ts',
-    background: './background.ts',
-    'popup/popup': './popup/popup.ts',
-    'options/options': './options/options.ts',
+    index: './content/index.ts',
+    background: './background/index.ts',
+    'popup/popup': './popup/index.ts',
+    'options/options': './options/index.ts',
   },
   output: {
     path: `${__dirname}/dist`,
@@ -51,12 +51,12 @@ const config = {
     new CopyWebpackPlugin([
       { from: 'icons', to: 'icons', ignore: ['icon.xcf', '.DS_Store'] },
       {
-        from: 'popup/popup.html',
-        to: 'popup/popup.html',
+        from: 'popup/index.html',
+        to: 'popup/index.html',
       },
       {
-        from: 'options/options.html',
-        to: 'options/options.html',
+        from: 'options/index.html',
+        to: 'options/index.html',
       },
       {
         from: 'manifest.json',

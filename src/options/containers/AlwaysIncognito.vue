@@ -17,21 +17,36 @@
       <div>
         <div>
           <label>
-            <input type="radio" name="type" value="address" v-model="type" />
+            <input
+              type="radio"
+              name="type"
+              :value="IncognitoPattern.Address"
+              v-model="type"
+            />
             Address
           </label>
         </div>
 
         <div>
           <label>
-            <input type="radio" name="type" value="protocol" v-model="type" />
+            <input
+              type="radio"
+              name="type"
+              :value="IncognitoPattern.Protocol"
+              v-model="type"
+            />
             Protocol
           </label>
         </div>
 
         <div>
           <label>
-            <input type="radio" name="type" value="path" v-model="type" />
+            <input
+              type="radio"
+              name="type"
+              :value="IncognitoPattern.Path"
+              v-model="type"
+            />
             Path
           </label>
         </div>
@@ -49,7 +64,8 @@
             <tr>
               <th>URL</th>
               <th>Type</th>
-              <th>Actions</th>
+              <th></th>
+              <!-- <th>Actions</th> -->
             </tr>
 
             <tr v-for="(address, index) in addresses" :key="index">
@@ -74,22 +90,20 @@
 import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
-import { Address } from '../types/Address';
+import { Address } from '../../shared/types/Address';
+
+import { IncognitoPattern } from '../../shared/enums/IncognitoPattern';
 
 export default {
   setup() {
     const isIncognitoModeEnabled = ref(false);
     const addresses = ref<Address[]>([]);
     const url = ref('');
-    const type = ref('');
+    const type = ref<IncognitoPattern>();
     const error = ref('');
 
     const toggleIncognitoMode = () => {
       isIncognitoModeEnabled.value = !isIncognitoModeEnabled.value;
-
-      //   extension.storage.local.set({
-      //     incognitoEnabled: isIncognitoModeEnabled.value,
-      //   });
     };
 
     const loadAddressList = () => {
@@ -123,23 +137,24 @@ export default {
           );
 
           if (!inArray.length) {
-            addresses.value.push(address);
+            addresses.value = [...addresses.value, address];
           }
         } else {
-          addresses.value.push(address);
+          addresses.value = [...addresses.value, address];
         }
 
         url.value = '';
-        type.value = '';
+        type.value = undefined;
       } else {
-        error.value = 'Type and value are required.';
+        error.value = 'Type and value are required';
       }
     };
 
     const removeAddress = (id: number) => {
       if (confirm('Are you sure you want to remove this addresses?')) {
-        // addresses.value =
-        addresses.value.filter((value, index) => index !== id && value);
+        addresses.value = [
+          ...addresses.value.filter((value, index) => index !== id && value),
+        ];
       }
     };
 
@@ -148,7 +163,7 @@ export default {
         addresses.value = [];
 
         url.value = '';
-        type.value = '';
+        type.value = undefined;
         error.value = '';
       }
     };
@@ -163,8 +178,20 @@ export default {
       });
     });
 
-    watch(addresses, (addresses, prevAddresses) => {
-      console.log(addresses, prevAddresses);
+    watch(addresses, () => {
+      extension.storage.local.set({
+        addresses: JSON.stringify(addresses.value),
+      });
+    });
+
+    watch(isIncognitoModeEnabled, () => {
+      extension.storage.local.set({
+        incognitoEnabled: isIncognitoModeEnabled.value,
+      });
+
+      // if (isIncognitoModeEnabled.value) {
+      //   loadAddressList();
+      // }
     });
 
     return {
@@ -177,11 +204,12 @@ export default {
       createAddress,
       removeAddress,
       clearAddresses,
+      IncognitoPattern,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// @import '../../reset.scss';
+@import '../../shared/reset.scss';
 </style>

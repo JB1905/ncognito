@@ -7,8 +7,8 @@
         type="radio"
         name="exit"
         id="piano"
-        value="piano"
-        @click="changeEvacuationWay('piano')"
+        :value="EvacuationWay.Pianist"
+        @click="changeEvacuationWay(EvacuationWay.Pianist)"
         v-model="evacuationWay"
       />
       <label for="piano">Pianist's mode <sup>1</sup></label>
@@ -19,7 +19,7 @@
         type="radio"
         name="exit"
         id="shortcode"
-        value="shortcode"
+        :value="EvacuationWay.Shortcode"
         v-model="evacuationWay"
       />
       <label for="shortcode">Shortcode</label>
@@ -33,7 +33,10 @@
         v-model="shortcode"
       />
 
-      <button type="submit" @click="changeEvacuationWay('shortcode')">
+      <button
+        type="submit"
+        @click="changeEvacuationWay(EvacuationWay.Shortcode)"
+      >
         Set
       </button>
 
@@ -48,56 +51,51 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
+
+import { EvacuationWay } from '../../../shared/enums/EvacuationWay';
 
 export default {
   setup() {
-    const evacuationWay = ref('');
+    const evacuationWay = ref<EvacuationWay>();
     const shortcode = ref('');
     const error = ref('');
 
-    const changeEvacuationWay = (way: string) => {
-      if (way === 'piano') {
-        extension.storage.local.set({
-          evacuation: {
-            name: 'piano',
-          },
-        });
-      } else if (way === 'shortcode') {
-        if (shortcode.value) {
-          extension.storage.local.set({
-            evacuation: {
-              name: 'shortcode',
-              shortcode: shortcode.value,
-            },
-          });
-        } else {
-          error.value = 'Shortcode is required';
-        }
-      }
+    const changeEvacuationWay = (way: EvacuationWay) => {
+      evacuationWay.value = way;
+
+      // console.log(way);
     };
 
     onMounted(() => {
-      // extension.storage.local.get('evacuation', (res) => {
-        // if (!res.evacuation) {
-          // extension.storage.local.set({
-          //   evacuation: {
-          //     name: 'piano',
-          //   },
-          // });
+      extension.storage.local.get('evacuation', (res) => {
+        // console.log(res.evacuation);
 
-          evacuationWay.value = 'piano';
-        // } else {
-          // if (res.evacuation.name === 'piano') {
-            evacuationWay.value = 'piano';
-          // } else if (res.evacuation.name === 'shortcode') {
-            evacuationWay.value = 'shortcode';
+        evacuationWay.value = res.evacuation?.name ?? 'piano';
 
-            // shortcode.value = res.evacuation.shortcode;
-          // }
-        // }
-      // });
+        if (res.evacuation?.name === 'shortcode') {
+          shortcode.value = res.evacuation?.shortcode;
+        }
+      });
+    });
+
+    watch(evacuationWay, () => {
+      // console.log(evacuationWay.value, shortcode.value);
+
+      if (
+        evacuationWay.value !== EvacuationWay.Shortcode ||
+        (evacuationWay.value === EvacuationWay.Shortcode && shortcode.value)
+      ) {
+        // console.log(false, true);
+
+        extension.storage.local.set({
+          evacuation: {
+            name: evacuationWay.value,
+            // shortcode: shortcode.value
+          },
+        });
+      }
     });
 
     return {
@@ -105,23 +103,12 @@ export default {
       evacuationWay,
       changeEvacuationWay,
       error,
+      EvacuationWay,
     };
   },
 };
-
-
-
-    // onMounted(() => {
-    //   extension.storage.local.get('panicModeEnabled', (res) => {
-    //     // if (res.panicModeEnabled) {
-    //     //   isEnabled = true;
-    //     //   init();
-    //     // } else{ isEnabled = false;}
-    //   });
-    // });
 </script>
 
 <style lang="scss" scoped>
-// @import '../../../reset.scss';
+@import '../../../shared/reset.scss';
 </style>
-

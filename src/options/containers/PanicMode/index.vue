@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
 import Action from './Action';
@@ -35,16 +35,18 @@ export default {
 
     const togglePanicMode = () => {
       isPanicModeEnabled.value = !isPanicModeEnabled.value;
-
-      // extension.storage.local.set({
-      //   panicModeEnabled: isPanicModeEnabled.value,
-      // });
     };
 
     onMounted(() => {
-      // extension.storage.local.get('panicModeEnabled', (res) => {
-      //   isPanicModeEnabled.value = res.panicModeEnabled;
-      // });
+      extension.storage.local.get('panicModeEnabled', (res) => {
+        isPanicModeEnabled.value = res.panicModeEnabled;
+      });
+    });
+
+    watch(isPanicModeEnabled, () => {
+      extension.storage.local.set({
+        panicModeEnabled: isPanicModeEnabled.value,
+      });
     });
 
     return {
@@ -56,5 +58,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import '../../../reset.scss';
+@import '../../../shared/reset.scss';
+
+// label {
+
+//   display: flex;
+//   align-items: center;
+//   // background:red;
+// }
 </style>

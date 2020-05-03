@@ -3,7 +3,7 @@
 ## About
 nCognito is a cross browsers (Chrome, Firefox, Edge, Opera) incognito mode plugin.
 
-## Features
+## Main Features
 ### Panic mode
 Quick escape window, tab or website by pressing at least 4 keys at the same time or using set shortcut.
 
@@ -27,6 +27,11 @@ git clone https://github.com/JB1905/ncognito.git
 ```
 cd ncognito
 ```
+
+## Build with
+- Vue
+- TypeScript
+- SCSS
 
 ## License
 This project is licensed under the MIT License © 2018-present Jakub Biesiada
