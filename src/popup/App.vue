@@ -2,7 +2,7 @@
   <div class="popup">
     <header class="popup__header">
       <h1>{{ name }}</h1>
-      <span>v{{ version }} beta 1</span>
+      <span>v{{ version }}</span>
     </header>
 
     <main class="popup__content">
