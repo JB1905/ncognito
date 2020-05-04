@@ -48,7 +48,7 @@ export default {
     };
 
     onMounted(() => {
-      extension.windows.getCurrent(({ incognito, ...rest }: any) => {
+      extension.windows.getCurrent(({ incognito }: any) => {
         isPrivateWindow.value = incognito;
       });
 
