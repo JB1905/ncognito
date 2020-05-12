@@ -29,9 +29,9 @@ cd ncognito
 ```
 
 ## Build with
-- Vue
-- TypeScript
-- SCSS
+- [Vue](https://vuejs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [SCSS](https://sass-lang.com/)
 
 ## License
 This project is licensed under the MIT License © 2018-present Jakub Biesiada
