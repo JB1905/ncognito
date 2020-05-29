@@ -21,16 +21,21 @@
 import { ref, onMounted } from 'vue';
 import extension from 'extensionizer';
 
+import { supportedProtocols } from '../shared/constants/supportedProtocols';
+
 import { name, version } from '../manifest.json';
 
 export default {
   setup() {
-    const supportedProtocols: any = ['http', 'https'];
-
     const isPrivateWindow = ref(false);
     const isSupportedProtocol = ref(false);
 
-    const openSettings = () => extension.runtime.openOptionsPage();
+    // TODO check if current page is settings
+    const openSettings = () => {
+      extension.runtime.openOptionsPage();
+
+      window.close();
+    };
 
     const openInPrivate = () => {
       extension.tabs.query(
@@ -52,13 +57,14 @@ export default {
         isPrivateWindow.value = incognito;
       });
 
-      extension.tabs.query({ active: true }, (tab: any) => {
-        // IMPORTANT TAB RETURNS ACTIVE TAB FOR EACH WINDOW
-
-        isSupportedProtocol.value = supportedProtocols.includes(
-          tab[0].url.split(':')[0]
-        );
-      });
+      extension.tabs.query(
+        { active: true, currentWindow: true },
+        ([tab]: any) => {
+          isSupportedProtocol.value = (supportedProtocols as any).includes(
+            tab.url.split(':')[0]
+          );
+        }
+      );
     });
 
     return {

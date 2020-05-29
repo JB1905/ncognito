@@ -3,11 +3,7 @@
     <h2>Panic mode</h2>
 
     <label>
-      <input
-        type="checkbox"
-        v-model="isPanicModeEnabled"
-        @click="togglePanicMode"
-      />
+      <input type="checkbox" v-model="isPanicModeEnabled" />
       Enable
     </label>
 
@@ -25,6 +21,8 @@ import extension from 'extensionizer';
 import Action from './Action';
 import Evacuation from './Evacuation';
 
+import { StoreKey } from '../../../shared/enums/StoreKey';
+
 export default {
   components: {
     Action,
@@ -33,12 +31,8 @@ export default {
   setup() {
     const isPanicModeEnabled = ref(false);
 
-    const togglePanicMode = () => {
-      isPanicModeEnabled.value = !isPanicModeEnabled.value;
-    };
-
     onMounted(() => {
-      extension.storage.local.get('panicModeEnabled', (res) => {
+      extension.storage.local.get(StoreKey.PanicModeEnabled, (res) => {
         isPanicModeEnabled.value = res.panicModeEnabled;
       });
     });
@@ -49,10 +43,7 @@ export default {
       });
     });
 
-    return {
-      isPanicModeEnabled,
-      togglePanicMode,
-    };
+    return { isPanicModeEnabled };
   },
 };
 </script>

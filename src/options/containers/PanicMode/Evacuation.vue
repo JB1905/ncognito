@@ -25,7 +25,10 @@
       <label for="shortcode">Shortcode</label>
     </div>
 
-    <div v-if="evacuationWay === 'shortcode'" class="container__form">
+    <div
+      v-if="evacuationWay === EvacuationWay.Shortcode"
+      class="container__form"
+    >
       <input
         type="text"
         id="shortcode"
@@ -55,6 +58,7 @@ import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
 import { EvacuationWay } from '../../../shared/enums/EvacuationWay';
+import { StoreKey } from '../../../shared/enums/StoreKey';
 
 export default {
   setup() {
@@ -64,12 +68,10 @@ export default {
 
     const changeEvacuationWay = (way: EvacuationWay) => {
       evacuationWay.value = way;
-
-      // console.log(way);
     };
 
     onMounted(() => {
-      extension.storage.local.get('evacuation', (res) => {
+      extension.storage.local.get(StoreKey.Evacuation, (res) => {
         // console.log(res.evacuation);
 
         evacuationWay.value = res.evacuation?.name ?? 'piano';

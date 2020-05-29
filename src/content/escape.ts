@@ -1,58 +1,68 @@
 import extension from 'extensionizer';
 
-const keys: any = [];
+import { ActionType } from '../shared/enums/ActionType';
+import { EvacuationWay } from '../shared/enums/EvacuationWay';
+import { StoreKey } from '../shared/enums/StoreKey';
 
-const onKeyDown = (e: any) => {
-  extension.storage.local.get('evacuation', (res: any) => {
-    if (res.evacuation) {
-      if (!keys.includes(e.key)) {
-        keys.push(e.key);
-      }
+import { panicMode } from '../../features.config.json';
 
-      if (
-        (res.evacuation.name === 'piano' && keys.length > 4) ||
-        res.evacuation.name === 'shortcode'
-        // && checkArrays(keys, res)
-      ) {
-        escapeFromIncognito();
-      }
-    }
-  });
-};
+if (panicMode) {
+  const keys: any = [];
 
-const onKeyUp = (e: any) => keys.splice(e.key, 1);
-
-const escapeFromIncognito = () => {
-  extension.storage.local.get('action', ({ action }: any) => {
-    if (action?.name === 'redirect') {
-      extension.storage.local.get('options', (res: any) => {
-        if (res.options) {
-          if (res.options.hide) document.body.style.display = 'none';
-
-          if (res.options.mute) {
-            extension.runtime.sendMessage({
-              mute: true,
-            });
-          }
+  const onKeyDown = (e: any) => {
+    extension.storage.local.get(StoreKey.Evacuation, (res: any) => {
+      if (res.evacuation) {
+        if (!keys.includes(e.key)) {
+          keys.push(e.key);
         }
-      });
 
-      window.location.href = action.address;
-    } else if (action.name === 'tab') {
-      extension.runtime.sendMessage({
-        action: 'tab',
-      });
-    } else if (action.name === 'window') {
-      extension.runtime.sendMessage({
-        action: 'window',
-      });
+        if (
+          res.evacuation.name === EvacuationWay.Pianist &&
+          keys.length > 4
+          // ||
+          // res.evacuation.name === EvacuationWay.Shortcode
+          // && checkArrays(keys, res)
+        ) {
+          escapeFromIncognito();
+        }
+      }
+    });
+  };
+
+  const onKeyUp = (e: any) => keys.splice(e.key, 1);
+
+  const escapeFromIncognito = () => {
+    extension.storage.local.get(StoreKey.Action, ({ action }: any) => {
+      if (action?.name === ActionType.Redirect) {
+        extension.storage.local.get(StoreKey.Options, (res: any) => {
+          if (res.options) {
+            if (res.options.hide) document.body.style.display = 'none';
+
+            if (res.options.mute) {
+              extension.runtime.sendMessage({
+                mute: true,
+              });
+            }
+          }
+        });
+
+        window.location.href = action.address;
+      } else if (action.name === ActionType.CloseTab) {
+        extension.runtime.sendMessage({
+          action: ActionType.CloseTab,
+        });
+      } else if (action.name === ActionType.CloseWindow) {
+        extension.runtime.sendMessage({
+          action: ActionType.CloseWindow,
+        });
+      }
+    });
+  };
+
+  extension.storage.local.get(StoreKey.PanicModeEnabled, (res: any) => {
+    if (res.panicModeEnabled) {
+      window.addEventListener('keydown', onKeyDown);
+      window.addEventListener('keyup', onKeyUp);
     }
   });
-};
-
-extension.storage.local.get('panicModeEnabled', (res: any) => {
-  if (res.panicModeEnabled) {
-    window.addEventListener('keydown', onKeyDown);
-    window.addEventListener('keyup', onKeyUp);
-  }
-});
+}

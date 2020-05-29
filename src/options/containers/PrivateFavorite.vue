@@ -3,11 +3,7 @@
     <h2>Private Favorite</h2>
 
     <label>
-      <input
-        type="checkbox"
-        v-model="isPrivateFavoriteEnabled"
-        @click="togglePrivateFavorite"
-      />
+      <input type="checkbox" v-model="isPrivateFavoriteEnabled" />
       Enable
     </label>
   </div>
@@ -20,14 +16,7 @@ export default {
   setup() {
     const isPrivateFavoriteEnabled = ref(false);
 
-    const togglePrivateFavorite = () => {
-      isPrivateFavoriteEnabled.value = !isPrivateFavoriteEnabled.value;
-    };
-
-    return {
-      isPrivateFavoriteEnabled,
-      togglePrivateFavorite,
-    };
+    return { isPrivateFavoriteEnabled };
   },
 };
 </script>

@@ -8,26 +8,79 @@
           <input
             type="radio"
             name="action"
-            :value="ActionType.Tab"
-            @click="setAction(ActionType.Tab)"
+            :value="ActionType.CloseTab"
+            @click="setAction(ActionType.CloseTab)"
             v-model="action"
           />
           Close tab
         </label>
       </div>
 
+      <!-- <div>
+        <label>
+          <input
+            type="radio"
+            name="action"
+            :value="ActionType.HideTab"
+            @click="setAction(ActionType.HideTab)"
+            v-model="action"
+          />
+          Hide tab
+        </label>
+      </div> -->
+
       <div>
         <label>
           <input
             type="radio"
             name="action"
-            :value="ActionType.Window"
-            @click="setAction(ActionType.Window)"
+            :value="ActionType.CloseWindow"
+            @click="setAction(ActionType.CloseWindow)"
             v-model="action"
           />
           Close window
         </label>
       </div>
+
+      <!-- <div>
+        <label>
+          <input
+            type="radio"
+            name="action"
+            :value="ActionType.HideWindow"
+            @click="setAction(ActionType.HideWindow)"
+            v-model="action"
+          />
+          Hide window
+        </label>
+      </div> -->
+
+      <!-- TODO option apply to all -->
+      <!-- <div>
+        <label>
+          <input
+            type="radio"
+            name="action"
+            :value="ActionType.HideAllWindows"
+            @click="setAction(ActionType.HideAllWindows)"
+            v-model="action"
+          />
+          Hide all windows
+        </label>
+      </div> -->
+
+      <!-- <div>
+        <label>
+          <input
+            type="radio"
+            name="action"
+            :value="ActionType.MinimizeWindow"
+            @click="setAction(ActionType.MinimizeWindow)"
+            v-model="action"
+          />
+          Minimize window
+        </label>
+      </div> -->
 
       <div>
         <label>
@@ -35,6 +88,7 @@
             type="radio"
             name="action"
             :value="ActionType.Redirect"
+            @click="setAction(ActionType.Redirect)"
             v-model="action"
           />
           Redirect to website
@@ -42,36 +96,28 @@
       </div>
     </div>
 
-    <div v-if="action === 'redirect'" class="form-container">
+    <div v-if="action === ActionType.Redirect" class="form-container">
       <input
         type="text"
         placeholder="e.g: https://www.mozilla.org"
         v-model="address"
       />
 
-      <button type="submit" @click="setAction(ActionType.Redirect)">Add</button>
+      <button type="submit">Add</button>
 
       <p class="error">{{ error }}</p>
+    </div>
 
-      <div class="options">
-        <label>
-          <input
-            type="checkbox"
-            v-model="isHidden"
-            @click="setOptions('hide')"
-          />
-          Hide
-        </label>
+    <div class="options">
+      <label>
+        <input type="checkbox" v-model="isHidden" />
+        Hide Content
+      </label>
 
-        <label>
-          <input
-            type="checkbox"
-            v-model="isMuted"
-            @click="setOptions('mute')"
-          />
-          Mute
-        </label>
-      </div>
+      <label>
+        <input type="checkbox" v-model="isMuted" />
+        Mute Media
+      </label>
     </div>
   </section>
 </template>
@@ -81,10 +127,11 @@ import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
 import { ActionType } from '../../../shared/enums/ActionType';
+import { StoreKey } from '../../../shared/enums/StoreKey';
 
 export default {
   setup() {
-    const action = ref<ActionType>();
+    const action = ref(ActionType.CloseTab);
     const address = ref('');
     const isHidden = ref(false);
     const isMuted = ref(false);
@@ -94,19 +141,18 @@ export default {
       action.value = actionType;
     };
 
-    const setOptions = (optionName: string) => {};
-
     onMounted(() => {
-      extension.storage.local.get('action', (res) => {
-        // console.log(res.action.name)
-
+      extension.storage.local.get(StoreKey.Action, (res) => {
         // TODO
         action.value = res.action?.name ?? '';
       });
     });
 
     onMounted(() => {
-      extension.storage.local.get('options', (res) => {});
+      extension.storage.local.get(StoreKey.Options, (res) => {
+        isHidden.value = res.options?.hide;
+        isMuted.value = res.options?.mute;
+      });
     });
 
     watch(action, () => {
@@ -114,12 +160,19 @@ export default {
         return;
       }
 
-      // console.log(action.value,  address.value)
-
       extension.storage.local.set({
         action: {
           name: action.value,
           address: address.value,
+        },
+      });
+    });
+
+    watch([isMuted, isHidden], () => {
+      extension.storage.local.set({
+        options: {
+          hide: isHidden.value,
+          mute: isMuted.value,
         },
       });
     });
@@ -131,7 +184,6 @@ export default {
       isMuted,
       error,
       setAction,
-      setOptions,
       ActionType,
     };
   },
@@ -140,6 +192,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../shared/reset.scss';
+
+.options {
+  margin-top: 6px;
+  display: flex;
+
+  label {
+    margin-right: 15px;
+  }
+}
+
+.form-container {
+  input[type='text'] {
+    margin-top: 6px;
+    min-width: 190px;
+  }
+}
 
 // .options {
 //   >

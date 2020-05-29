@@ -4,8 +4,8 @@
       <input
         type="radio"
         name="action"
-        :value="ActionType.Tab"
-        @click="setAction(ActionType.Tab)"
+        :value="ActionType.CloseTab"
+        @click="setAction(ActionType.CloseTab)"
         v-model="action"
       />
       <slot />
@@ -14,8 +14,6 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-
 export default {};
 </script>
 

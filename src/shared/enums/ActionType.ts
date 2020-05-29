@@ -1,5 +1,7 @@
 export enum ActionType {
-  Tab = 'tab',
-  Window = 'window',
+  CloseTab = 'close-tab',
+  CloseWindow = 'close-window',
+  HideWindow = 'hide-window',
+  MinimizeWindow = 'minimize-window',
   Redirect = 'redirect',
 }

@@ -3,11 +3,7 @@
     <h2>Other</h2>
 
     <label>
-      <input
-        type="checkbox"
-        v-model="isOpenInNonPrivateEnabled"
-        @click="toggleOpenInNonPrivate"
-      />
+      <input type="checkbox" v-model="isOpenInNonPrivateEnabled" />
       Open in non-private window
     </label>
   </div>
@@ -16,17 +12,14 @@
 <script lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
+import { StoreKey } from '../../shared/enums/StoreKey';
 
 export default {
   setup() {
     const isOpenInNonPrivateEnabled = ref(false);
 
-    const toggleOpenInNonPrivate = () => {
-      isOpenInNonPrivateEnabled.value = !isOpenInNonPrivateEnabled.value;
-    };
-
     onMounted(() => {
-      extension.storage.local.get('openInNonPrivateEnabled', (res) => {
+      extension.storage.local.get(StoreKey.OpenInNonPrivateEnabled, (res) => {
         isOpenInNonPrivateEnabled.value = res.openInNonPrivateEnabled;
       });
     });
@@ -37,10 +30,7 @@ export default {
       });
     });
 
-    return {
-      isOpenInNonPrivateEnabled,
-      toggleOpenInNonPrivate,
-    };
+    return { isOpenInNonPrivateEnabled };
   },
 };
 </script>

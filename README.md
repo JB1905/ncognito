@@ -19,12 +19,12 @@ After click on the button in popup window, current address will be opened in pri
 
 ## Setup
 ##### 1. Clone repo
-```
+```sh
 git clone https://github.com/JB1905/ncognito.git
 ```
 
 ##### 2. Go to directory
-```
+```sh
 cd ncognito
 ```
 

@@ -1,0 +1,17 @@
+{
+  "panicMode": false,
+  "alwaysIncognito": true,
+  "privateFavorite": false,
+  "openInNonPrivate": true,
+  "disableActiveSettings": false,
+  "openInPrivate": false,
+  "alwaysCreateNewPrivate": false,
+  "alwaysCreateNewNonPrivate": true,
+  "openExistingWindowPrivate": false,
+  "openExistingWindowNonPrivate": true,
+  "hideWindowEvacuation": false,
+  "minimizeindowEvacuation": false,
+  "applyEvacuationToAll": false,
+  "applyEvacuationToActive": false,
+  "darkMode": false
+}

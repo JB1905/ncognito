@@ -3,11 +3,7 @@
     <h2>Always incognito</h2>
 
     <label>
-      <input
-        type="checkbox"
-        v-model="isIncognitoModeEnabled"
-        @click="toggleIncognitoMode"
-      />
+      <input type="checkbox" v-model="isIncognitoModeEnabled" />
       Enable
     </label>
 
@@ -61,22 +57,24 @@
 
         <div v-if="addresses.length">
           <table>
+            <thead>
             <tr>
               <th>URL</th>
               <th>Type</th>
               <th></th>
               <!-- <th>Actions</th> -->
-            </tr>
+            </tr></thead>
 
+<tbody>
             <tr v-for="(address, index) in addresses" :key="index">
               <td>{{ address.url }}</td>
-              <td>{{ address.type }}</td>
+              <td class="address-type">{{ address.type }}</td>
               <td>
                 <button type="submit" @click="removeAddress(index)">
                   Remove
                 </button>
               </td>
-            </tr>
+            </tr></tbody>
           </table>
 
           <button @click="clearAddresses">Clear</button>
@@ -93,6 +91,7 @@ import extension from 'extensionizer';
 import { Address } from '../../shared/types/Address';
 
 import { IncognitoPattern } from '../../shared/enums/IncognitoPattern';
+import { StoreKey } from '../../shared/enums/StoreKey';
 
 export default {
   setup() {
@@ -102,12 +101,8 @@ export default {
     const type = ref<IncognitoPattern>();
     const error = ref('');
 
-    const toggleIncognitoMode = () => {
-      isIncognitoModeEnabled.value = !isIncognitoModeEnabled.value;
-    };
-
     const loadAddressList = () => {
-      extension.storage.local.get('addresses', (res) => {
+      extension.storage.local.get(StoreKey.Addresses, (res) => {
         if (res.addresses) {
           addresses.value = JSON.parse(res.addresses);
         }
@@ -169,10 +164,10 @@ export default {
     };
 
     onMounted(() => {
-      extension.storage.local.get('incognitoEnabled', (res) => {
-        isIncognitoModeEnabled.value = res.incognitoEnabled;
+      extension.storage.local.get(StoreKey.IncognitoEnabled, (res) => {
+        if (res.incognitoEnabled) {
+          isIncognitoModeEnabled.value = res.incognitoEnabled;
 
-        if (isIncognitoModeEnabled.value) {
           loadAddressList();
         }
       });
@@ -189,9 +184,9 @@ export default {
         incognitoEnabled: isIncognitoModeEnabled.value,
       });
 
-      // if (isIncognitoModeEnabled.value) {
-      //   loadAddressList();
-      // }
+      if (isIncognitoModeEnabled.value) {
+        loadAddressList();
+      }
     });
 
     return {
@@ -200,7 +195,6 @@ export default {
       error,
       addresses,
       isIncognitoModeEnabled,
-      toggleIncognitoMode,
       createAddress,
       removeAddress,
       clearAddresses,
@@ -212,4 +206,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../shared/reset.scss';
+
+.address-type {
+  text-transform: capitalize;
+}
 </style>

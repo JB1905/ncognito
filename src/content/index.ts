@@ -1,3 +1,3 @@
 import './checkAlwaysIncognitoUrl';
-// import './openInIncognito';
+import './openInIncognito';
 import './escape';

@@ -1,29 +1,41 @@
 import extension from 'extensionizer';
 
-const createBookmark = () => {
-  extension.bookmarks.create({ title: 'nCognito Bookmarks' }, ({ id }: any) => {
-    extension.storage.local.set({
-      bookmarksFolder: { id },
-    });
-  });
-};
+import { StoreKey } from '../shared/enums/StoreKey';
 
-extension.storage.local.get('bookmarksFolder', ({ bookmarksFolder }: any) => {
-  if (bookmarksFolder === undefined) {
-    return createBookmark();
-  }
+import { privateFavorite } from '../../features.config.json';
 
-  extension.bookmarks.get(bookmarksFolder.id, (bookmarks: any) => {
-    if (bookmarks) {
-      const exists = bookmarks.find(
-        (item: any) => item.id === bookmarksFolder.id
-      );
-
-      if (exists.length === 0) {
-        createBookmark();
+if (privateFavorite) {
+  const createBookmark = () => {
+    extension.bookmarks.create(
+      { title: 'nCognito Bookmarks' },
+      ({ id }: any) => {
+        extension.storage.local.set({
+          bookmarksFolder: { id },
+        });
       }
-    } else {
-      createBookmark();
+    );
+  };
+
+  extension.storage.local.get(
+    StoreKey.BookmarkFolder,
+    ({ bookmarksFolder }: any) => {
+      if (bookmarksFolder === undefined) {
+        return createBookmark();
+      }
+
+      extension.bookmarks.get(bookmarksFolder.id, (bookmarks: any) => {
+        if (bookmarks) {
+          const exists = bookmarks.find(
+            (item: any) => item.id === bookmarksFolder.id
+          );
+
+          if (exists) {
+            createBookmark();
+          }
+        } else {
+          createBookmark();
+        }
+      });
     }
-  });
-});
+  );
+}

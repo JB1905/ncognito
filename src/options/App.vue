@@ -1,24 +1,39 @@
 <template>
   <main>
-    <panic-mode />
-    <always-incognito />
-    <!-- <private-favorite /> -->
-    <other />
+    <panic-mode v-if="panicMode" />
+    <always-incognito v-if="alwaysIncognito" />
+    <private-favorite v-if="privateFavorite" />
+    <other v-if="openInNonPrivate" />
   </main>
 </template>
 
 <script lang="ts">
 import PanicMode from './containers/PanicMode';
 import AlwaysIncognito from './containers/AlwaysIncognito';
-// import PrivateFavorite from './containers/PrivateFavorite';
+import PrivateFavorite from './containers/PrivateFavorite';
 import Other from './containers/Other';
+
+import {
+  panicMode,
+  alwaysIncognito,
+  privateFavorite,
+  openInNonPrivate,
+} from '../../features.config.json';
 
 export default {
   components: {
     PanicMode,
     AlwaysIncognito,
-    // PrivateFavorite,
+    PrivateFavorite,
     Other,
+  },
+  setup() {
+    return {
+      panicMode,
+      alwaysIncognito,
+      privateFavorite,
+      openInNonPrivate,
+    };
   },
 };
 </script>

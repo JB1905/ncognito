@@ -1,3 +1,3 @@
-import './contextMenu';
-// import './privateFavorite';
-// import './events';
+import './openInNonPrivate';
+import './privateFavorite';
+import './events';
