@@ -1,6 +1,6 @@
 import { IncognitoPattern } from '../enums/IncognitoPattern';
 
-export type Address = {
-  url: string;
-  type: IncognitoPattern;
+export interface Address {
+  readonly url: string;
+  readonly type: IncognitoPattern;
 };

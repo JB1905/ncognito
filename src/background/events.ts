@@ -1,6 +1,6 @@
 import extension from 'extensionizer';
 
-import { ActionType } from '../shared/enums/ActionType';
+import { ActionType } from '../shared/constants/ActionType';
 
 let privateWindow: any = null;
 // let newTab: any = true;

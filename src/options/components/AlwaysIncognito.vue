@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <h2>Always incognito</h2>
+    <!-- <h2>Always incognito</h2> -->
 
     <label>
       <input type="checkbox" v-model="isIncognitoModeEnabled" />
-      Enable
+      <!-- Enable -->
     </label>
 
     <div v-if="isIncognitoModeEnabled">
-      <p>Add addresses, protocols or paths to be opened only in private mode</p>
+      <!-- <p>Add addresses, protocols or paths to be opened only in private mode</p> -->
 
       <div>
         <div>
@@ -19,7 +19,7 @@
               :value="IncognitoPattern.Address"
               v-model="type"
             />
-            Address
+            <!-- Address -->
           </label>
         </div>
 
@@ -31,7 +31,7 @@
               :value="IncognitoPattern.Protocol"
               v-model="type"
             />
-            Protocol
+            <!-- Protocol -->
           </label>
         </div>
 
@@ -43,14 +43,14 @@
               :value="IncognitoPattern.Path"
               v-model="type"
             />
-            Path
+            <!-- Path -->
           </label>
         </div>
 
         <div class="container__form">
-          <input type="text" placeholder="e.g: google, http" v-model="url" />
+          <!-- <input type="text" placeholder="e.g: google, http" v-model="url" /> -->
 
-          <button @click="createAddress">Add</button>
+          <!-- <button @click="createAddress">Add</button> -->
         </div>
 
         <p class="error">{{ error }}</p>
@@ -71,13 +71,13 @@
               <td class="address-type">{{ address.type }}</td>
               <td>
                 <button type="submit" @click="removeAddress(index)">
-                  Remove
+                  <!-- Remove -->
                 </button>
               </td>
             </tr></tbody>
           </table>
 
-          <button @click="clearAddresses">Clear</button>
+          <!-- <button @click="clearAddresses">Clear</button> -->
         </div>
       </div>
     </div>
@@ -90,8 +90,8 @@ import extension from 'extensionizer';
 
 import { Address } from '../../shared/types/Address';
 
-import { IncognitoPattern } from '../../shared/enums/IncognitoPattern';
-import { StoreKey } from '../../shared/enums/StoreKey';
+import { IncognitoPattern } from '../../shared/constants/IncognitoPattern';
+import { StoreKey } from '../../shared/constants/StoreKey';
 
 export default {
   setup() {
@@ -119,7 +119,7 @@ export default {
           return address.url === url.value && address.type === type.value;
         });
 
-        error.value = check.length ? 'Item already exists' : '';
+        // error.value = check.length ? 'Item already exists' : '';
 
         const address = {
           url: url.value,
@@ -141,26 +141,26 @@ export default {
         url.value = '';
         type.value = undefined;
       } else {
-        error.value = 'Type and value are required';
+        // error.value = 'Type and value are required';
       }
     };
 
     const removeAddress = (id: number) => {
-      if (confirm('Are you sure you want to remove this addresses?')) {
-        addresses.value = [
-          ...addresses.value.filter((value, index) => index !== id && value),
-        ];
-      }
+      // if (confirm('Are you sure you want to remove this addresses?')) {
+      //   addresses.value = [
+      //     ...addresses.value.filter((value, index) => index !== id && value),
+      //   ];
+      // }
     };
 
     const clearAddresses = () => {
-      if (confirm('Are you sure you want to erase saved addresses?')) {
-        addresses.value = [];
+      // if (confirm('Are you sure you want to erase saved addresses?')) {
+      //   addresses.value = [];
 
-        url.value = '';
-        type.value = undefined;
-        error.value = '';
-      }
+      //   url.value = '';
+      //   type.value = undefined;
+      //   error.value = '';
+      // }
     };
 
     onMounted(() => {

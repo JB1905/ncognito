@@ -5,10 +5,13 @@ import { StoreKey } from '../shared/enums/StoreKey';
 import { alwaysIncognito } from '../../features.config.json';
 
 if (alwaysIncognito) {
+  // const 
+
   const checkAlwaysIncognitoUrl = (e: any) => {
     if (e.target.href) {
       e.preventDefault();
 
+      // TODO refactor
       extension.storage.local.get(StoreKey.Addresses, ({ addresses }: any) => {
         addresses.map(({ url }: any) => {
           if (e.target.href.includes(url)) {

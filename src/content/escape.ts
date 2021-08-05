@@ -1,6 +1,6 @@
 import extension from 'extensionizer';
 
-import { ActionType } from '../shared/enums/ActionType';
+import { ActionType } from '../shared/constants/ActionType';
 import { EvacuationWay } from '../shared/enums/EvacuationWay';
 import { StoreKey } from '../shared/enums/StoreKey';
 

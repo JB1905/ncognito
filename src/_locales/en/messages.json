@@ -1,0 +1,135 @@
+{
+  "extensionDescription": {
+    "message": "Incognito mode extension",
+    "description": "Description of the extension."
+  },
+  "settingsTitle": {
+    "message": "Settings"
+  },
+  "inPrivateTitle": {
+    "message": "Open in private window"
+  },
+  "x": {
+    "message": "Private Favorite"
+  },
+  "xx": {
+    "message": "Enable"
+  },
+  "w": {
+    "message": "Other"
+  },
+  "ww": {
+    "message": "Open in non-private window"
+  },
+  "f": {
+    "message": "Always incognito"
+  },
+  "xx": {
+    "message": "Enable"
+  },
+  "fff": {
+    "message": "Add addresses, protocols or paths to be opened only in private mode"
+  },
+  "ffff": {
+    "message": "Address"
+  },
+  "fffff": {
+    "message": "Protocol"
+  },
+  "ffffff": {
+    "message": "Path"
+  },
+  "a": {
+    "message": "e.g: google, http"
+  },
+  "g": {
+    "message": "Add"
+  },
+  "p": {
+    "message": "URL"
+  },
+  "px": {
+    "message": "Type"
+  },
+  "zzz": {
+    "message": "Remove"
+  },
+  "ap": {
+    "message": "Clear"
+  },
+  "s": {
+    "message": "Item already exists"
+  },
+  "sp": {
+    "message": "Type and value are required"
+  },
+  "spw": {
+    "message": "Are you sure you want to remove this addresses?"
+  },
+  "spx": {
+    "message": "Are you sure you want to erase saved addresses?"
+  },
+  "dsa": {
+    "message": "Action"
+  },
+  "das": {
+    "message": "Close tab"
+  },
+  "h": {
+    "message": "Hide tab"
+  },
+  "cw": {
+    "message": "Close window"
+  },
+  "hw": {
+    "message": "Hide window"
+  },
+  "haw": {
+    "message": "Hide all windows"
+  },
+  "mw": {
+    "message": "Minimize window"
+  },
+  "rtw": {
+    "message": "Redirect to website"
+  },
+  "pcw": {
+    "message": "e.g: https://www.mozilla.org"
+  },
+  "ax": {
+    "message": "Add"
+  },
+  "hc": {
+    "message": "Hide Content"
+  },
+  "mm": {
+    "message": "Mute Media"
+  },
+  "waoe": {
+    "message": "Way of evacuation"
+  },
+  "pnm": {
+    "message": "Pianist's mode"
+  },
+  "shrt": {
+    "message": "Shortcode"
+  },
+  "plcsh": {
+    "message": "e.g: shift+e"
+  },
+  "aaa": {
+    "message": "Set"
+  },
+  "i": {
+    "message": "Leaving the private mode by simultaneously pressing at least 4 keys"
+  },
+  "panm": {
+    "message": "Panic mode"
+  },
+  "eee": {
+    "message": "Enable"
+  },
+  "bookmarks": {
+    "message": "nCognito Bookmarks"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "nCognito",
-  "description": "Cross browser incognito mode extension",
+  "description": "__MSG_extensionDescription__",
   "manifest_version": 2,
   "version": "2.0.0",
   "author": "Jakub Biesiada",
@@ -26,5 +26,6 @@
       "js": ["index.js"]
     }
   ],
-  "permissions": ["tabs", "storage", "history", "bookmarks", "contextMenus"]
+  "permissions": ["tabs", "storage", "history", "bookmarks", "contextMenus"],
+  "default_locale": "en"
 }

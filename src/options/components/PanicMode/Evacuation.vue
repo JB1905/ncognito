@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>Way of evacuation</h3>
+    <!-- <h3>Way of evacuation</h3> -->
 
     <div>
       <input
@@ -11,7 +11,7 @@
         @click="changeEvacuationWay(EvacuationWay.Pianist)"
         v-model="evacuationWay"
       />
-      <label for="piano">Pianist's mode <sup>1</sup></label>
+      <!-- <label for="piano">Pianist's mode <sup>1</sup></label> -->
     </div>
 
     <div>
@@ -22,25 +22,25 @@
         :value="EvacuationWay.Shortcode"
         v-model="evacuationWay"
       />
-      <label for="shortcode">Shortcode</label>
+      <!-- <label for="shortcode">Shortcode</label> -->
     </div>
 
     <div
       v-if="evacuationWay === EvacuationWay.Shortcode"
       class="container__form"
     >
-      <input
+      <!-- <input
         type="text"
         id="shortcode"
         placeholder="e.g: shift+e"
         v-model="shortcode"
-      />
+      /> -->
 
       <button
         type="submit"
         @click="changeEvacuationWay(EvacuationWay.Shortcode)"
       >
-        Set
+        <!-- Set -->
       </button>
 
       <p class="error">{{ error }}</p>
@@ -48,7 +48,7 @@
 
     <p>
       <sup>1</sup>
-      <i>Leaving the private mode by simultaneously pressing at least 4 keys</i>
+      <!-- <i>Leaving the private mode by simultaneously pressing at least 4 keys</i> -->
     </p>
   </section>
 </template>
@@ -57,8 +57,8 @@
 import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
-import { EvacuationWay } from '../../../shared/enums/EvacuationWay';
-import { StoreKey } from '../../../shared/enums/StoreKey';
+import { EvacuationWay } from '../../../shared/constants/EvacuationWay';
+import { StoreKey } from '../../../shared/constants/StoreKey';
 
 export default {
   setup() {

@@ -1,6 +1,7 @@
 <template>
   <section>
-    <h3>Action</h3>
+    <!-- <h3>Action</h3> -->
+    <!-- <h3>{{ sectionTitle }}</h3> -->
 
     <div>
       <div>
@@ -12,7 +13,8 @@
             @click="setAction(ActionType.CloseTab)"
             v-model="action"
           />
-          Close tab
+          <!-- {{ closeTabText }} -->
+          <!-- Close tab -->
         </label>
       </div>
 
@@ -25,6 +27,7 @@
             @click="setAction(ActionType.HideTab)"
             v-model="action"
           />
+          {{ hideTabText }}
           Hide tab
         </label>
       </div> -->
@@ -38,7 +41,8 @@
             @click="setAction(ActionType.CloseWindow)"
             v-model="action"
           />
-          Close window
+          <!-- {{closeWindowText}} -->
+          <!-- Close window -->
         </label>
       </div>
 
@@ -51,6 +55,7 @@
             @click="setAction(ActionType.HideWindow)"
             v-model="action"
           />
+          {{hideWindowText}}
           Hide window
         </label>
       </div> -->
@@ -65,6 +70,7 @@
             @click="setAction(ActionType.HideAllWindows)"
             v-model="action"
           />
+          {{hideAllWindowsText}}
           Hide all windows
         </label>
       </div> -->
@@ -78,6 +84,7 @@
             @click="setAction(ActionType.MinimizeWindow)"
             v-model="action"
           />
+          {{minimizeWindowText}}
           Minimize window
         </label>
       </div> -->
@@ -91,19 +98,22 @@
             @click="setAction(ActionType.Redirect)"
             v-model="action"
           />
-          Redirect to website
+          <!-- {{redirectToWebsiteText}} -->
+          <!-- Redirect to website -->
         </label>
       </div>
     </div>
 
     <div v-if="action === ActionType.Redirect" class="form-container">
-      <input
+      <!-- <input
         type="text"
         placeholder="e.g: https://www.mozilla.org"
+        placeholder={{addressPlaceholder}}
         v-model="address"
-      />
+      /> -->
 
-      <button type="submit">Add</button>
+      <!-- <button type="submit">Add</button> -->
+      <!-- <button type="submit">{{submitText}}</button> -->
 
       <p class="error">{{ error }}</p>
     </div>
@@ -111,12 +121,12 @@
     <div class="options">
       <label>
         <input type="checkbox" v-model="isHidden" />
-        Hide Content
+        <!-- Hide Content -->
       </label>
 
       <label>
         <input type="checkbox" v-model="isMuted" />
-        Mute Media
+        <!-- Mute Media -->
       </label>
     </div>
   </section>
@@ -126,8 +136,8 @@
 import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
 
-import { ActionType } from '../../../shared/enums/ActionType';
-import { StoreKey } from '../../../shared/enums/StoreKey';
+import { ActionType } from '../../../shared/constants/ActionType';
+import { StoreKey } from '../../../shared/constants/StoreKey';
 
 export default {
   setup() {
@@ -185,6 +195,7 @@ export default {
       error,
       setAction,
       ActionType,
+      // sectionTitle: t(''),
     };
   },
 };

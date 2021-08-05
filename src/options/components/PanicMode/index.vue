@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h2>Panic mode</h2>
+    <!-- <h2>Pasnic mode</h2> -->
 
     <label>
       <input type="checkbox" v-model="isPanicModeEnabled" />
-      Enable
+      <!-- Enable -->
     </label>
 
     <div v-if="isPanicModeEnabled">
@@ -21,7 +21,7 @@ import extension from 'extensionizer';
 import Action from './Action';
 import Evacuation from './Evacuation';
 
-import { StoreKey } from '../../../shared/enums/StoreKey';
+import { StoreKey } from '../../../shared/constants/StoreKey';
 
 export default {
   components: {

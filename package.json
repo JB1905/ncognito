@@ -12,41 +12,38 @@
     "watch:dev": "npm run build:dev -- --watch",
     "lint": "eslint 'src/**/*.{vue,ts}' --fix",
     "prettier": "prettier --write 'src/**/*.{vue,ts,scss,html}'",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "vue": "^3.0.0-beta.14"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^3.0.2",
-    "@vue/compiler-sfc": "^3.0.0-beta.14",
-    "copy-webpack-plugin": "^6.0.1",
-    "css-loader": "^3.5.3",
-    "cz-conventional-changelog": "3.2.0",
-    "eslint": "7.1.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^6.2.2",
+    "@typescript-eslint/parser": "^4.29.0",
+    "@vue/compiler-sfc": "^3.1.5",
+    "copy-webpack-plugin": "^8.1.1",
+    "css-loader": "^5.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.15.1",
     "extensionizer": "^1.0.1",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.7",
-    "node-sass": "^4.14.1",
-    "platform": "^1.3.5",
-    "prettier": "^2.0.5",
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.2.1",
-    "ts-loader": "^7.0.5",
-    "typescript": "^3.9.3",
-    "vue-eslint-parser": "^7.1.0",
-    "vue-loader": "^16.0.0-beta.3",
-    "webpack": "^4.43.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
+    "node-sass": "^6.0.1",
+    "platform": "^1.3.6",
+    "prettier": "^2.3.2",
+    "sass-loader": "^11.1.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "vue-eslint-parser": "^7.10.0",
+    "vue-loader": "^16.0.0-beta.7",
+    "webpack": "^5.48.0",
     "webpack-chrome-extension-reloader": "^1.3.0",
-    "webpack-cli": "^3.3.11"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "webpack-cli": "^4.7.2"
   },
   "lint-staged": {
     "src/**/*.{vue,ts}": [

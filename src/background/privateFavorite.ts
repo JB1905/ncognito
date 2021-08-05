@@ -7,7 +7,7 @@ import { privateFavorite } from '../../features.config.json';
 if (privateFavorite) {
   const createBookmark = () => {
     extension.bookmarks.create(
-      { title: 'nCognito Bookmarks' },
+      // { title: 'nCognito Bookmarks' },
       ({ id }: any) => {
         extension.storage.local.set({
           bookmarksFolder: { id },

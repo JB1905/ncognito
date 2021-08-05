@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h2>Other</h2>
+    <!-- <h2>Other</h2> -->
 
     <label>
       <input type="checkbox" v-model="isOpenInNonPrivateEnabled" />
-      Open in non-private window
+      <!-- Open in non-private window -->
     </label>
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import extension from 'extensionizer';
-import { StoreKey } from '../../shared/enums/StoreKey';
+import { StoreKey } from '../../shared/constants/StoreKey';
 
 export default {
   setup() {

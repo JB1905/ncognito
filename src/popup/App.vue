@@ -18,8 +18,11 @@
 </template>
 
 <script lang="ts">
+// TODO any in file
 import { ref, onMounted } from 'vue';
 import extension from 'extensionizer';
+
+import { t } from '../shared/helpers/translate';
 
 import { supportedProtocols } from '../shared/constants/supportedProtocols';
 
@@ -38,17 +41,22 @@ export default {
     };
 
     const openInPrivate = () => {
+      // TODO rename
+      const action = (tab) => {
+          const [currentTab] = tab;
+
+          extension.windows.create({
+            incognito: true,
+            url: currentTab.url,
+          });
+        }
+
       extension.tabs.query(
         {
           active: true,
           windowId: extension.windows.WINDOW_ID_CURRENT,
         },
-        (tab) => {
-          extension.windows.create({
-            incognito: true,
-            url: tab[0].url,
-          });
-        }
+        action
       );
     };
 
@@ -57,21 +65,26 @@ export default {
         isPrivateWindow.value = incognito;
       });
 
-      extension.tabs.query(
-        { active: true, currentWindow: true },
-        ([tab]: any) => {
-          isSupportedProtocol.value = (supportedProtocols as any).includes(
-            tab.url.split(':')[0]
+// TODO
+      const action = ([tab]: any) => {
+        const [currentTabProtocol] = tab.url.split(':')
+
+          isSupportedProtocol.value = (supportedProtocols).includes(
+           currentTabProtocol
           );
         }
+
+      extension.tabs.query(
+        { active: true, currentWindow: true },
+        action,
       );
     });
 
     return {
       name,
       version,
-      settingsTitle: 'Settings',
-      inPrivateTitle: 'Open in private window',
+      settingsTitle: t('settingsTitle'),
+      inPrivateTitle: t('inPrivateTitle'),
       isPrivateWindow,
       isSupportedProtocol,
       openSettings,

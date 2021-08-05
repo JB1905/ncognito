@@ -1,0 +1,12 @@
+{
+  "extensionDescription": {
+    "message": "Rozszerzenie trybu incognito",
+    "description": "Opis rozszerzenia."
+  },
+  "settingsTitle": {
+    "message": "Ustawienia"
+  },
+  "inPrivateTitle": {
+    "message": "Otwórz w oknie prywatnym"
+  }
+}
